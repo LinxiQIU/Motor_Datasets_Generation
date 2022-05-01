@@ -29,8 +29,10 @@ The point cloud dataset is composed of scene and cuboid point cloud. We use the 
 
 > We provide each motor with both scene and cuboid point cloud in Numpy and PCD format. You can convert the generated Numpy file to PCD by running `points2pcd.py`
 ### 4. Noise Point Cloud Dataset
-On the basis of the point cloud dataset in the previous step, we add more random noises to augment data. For example, we add a cover randomly above the motor, randomly move the clamping parts. You can get the whole augmented cuboid point cloud dataset by running `augmented_pc_generation.py` with Blensor. 
-> open 'Command Prompt' in Windows, change to the Blensor directory and type in following command:
+On the basis of the point cloud dataset in the previous step, we add more random noises to augment data. For example, we add a cover randomly above the motor, randomly move the clamping parts. Here is a sample image for augmented point cloud of cuboid.  
+![](https://github.com/LinxiQIU/Motor_Datasets_Generation/blob/master/images/cuboid_img.jpg)
+You can get the whole augmented cuboid point cloud dataset by running `augmented_pc_generation.py` with Blensor. 
+> Open 'Command Prompt' in Windows, change to the Blensor directory and type in following command:
 ```python
 blender -b -P path/of/augmented_pc_generation.py -- -i path/of/input -o path/of/output -clp path/of/clamping_system -ss(save scene) -sf(scene file format) -bb(3d bounding box) -sc(save cuboid) -cf(cuboid file format) -roim(rotation from image dataset) -csvp path/of/csv -n(number of generation)
 ```
