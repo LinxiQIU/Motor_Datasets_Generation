@@ -32,6 +32,7 @@ The point cloud dataset is composed of scene and cuboid point cloud. We use the 
 On the basis of the point cloud dataset in the previous step, we add more random noises to augment data. For example, we add a cover randomly above the motor, randomly move the clamping parts. Here is a sample image for augmented point cloud of cuboid.  
 ![](https://github.com/LinxiQIU/Motor_Datasets_Generation/blob/master/images/cuboid_img.jpg)
 You can get the whole augmented cuboid point cloud dataset by running `augmented_pc_generation.py` with Blensor. 
+> Copy the 'get_3d_bbox.py' and 'points2pcd.py' into the 'Blensor/2.79/scripts/modules/'
 > Open 'Command Prompt' in Windows, change to the Blensor directory and type in following command:
 ```python
 blender -b -P path/of/augmented_pc_generation.py -- -i path/of/input -o path/of/output -clp path/of/clamping_system -ss(save scene) -sf(scene file format) -bb(3d bounding box) -sc(save cuboid) -cf(cuboid file format) -roim(rotation from image dataset) -csvp path/of/csv -n(number of generation)
@@ -53,5 +54,5 @@ blender -b -P path/of/augmented_pc_generation.py -- -i path/of/input -o path/of/
 | -csvp | if -roim is False, save directory of rotation info.(default is save directory). if -roim is True, path of given csv file | string | optional/obligatory |
 | -n    | number of total generation (an integer multiple of 5)     | integer | obligatory  |
 
-If you want to modify the value of a boolean type of argument, just enter this cmd. Here is the example command for the demo.
+If you want to modify a boolean type of argument, just enter this cmd. Here is the example command for the demo.
 ![](https://github.com/LinxiQIU/Bosch-Motors-Dataset-generate/blob/main/blensor_cmd.png)
