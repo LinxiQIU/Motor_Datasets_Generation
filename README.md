@@ -51,6 +51,7 @@ blender -b -P C:\Users\linux\PycharmProjects\Master\point_cloud_generation.py --
 ```
 
 > We mark the position of the motor in the point cloud scene with a 3D bounding box, and save the three-dimensional coordinates of the center of each motor and the length, width and height of the entire motor in motor_3D_bounding_box.csv for the deep learning task of 3D object detection by running `vis_point_cloud.py`.
+
 ![](https://github.com/LinxiQIU/Motor_Datasets_Generation/blob/master/images/scene_img.jpg)
 > We provide each motor with both scene and cuboid point cloud in Numpy and PCD format. You can convert the generated Numpy file to PCD by running `points2pcd.py`, if you only generate the default numpy files at the beginning.
 ### 4. Point Cloud Dataset augmentation
