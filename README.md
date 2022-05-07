@@ -64,4 +64,4 @@ You can get the whole augmented cuboid point cloud dataset by running `augmented
 blender -b -P path/of/augmented_pc_generation.py -- -i path/of/input -o path/of/output -clp path/of/clamping_system -ss(save scene) -sf(scene file format) -bb(3d bounding box) -sc(save cuboid) -cf(cuboid file format) -roim(rotation from image dataset) -csvp path/of/csv -n(number of generation)
 ```
 Here is the example command for the demo.
-![](https://github.com/LinxiQIU/Bosch-Motors-Dataset-generate/blob/main/blensor_cmd.png)
+![](https://github.com/LinxiQIU/Motor_Datasets_Generation/blob/main/blensor_cmd.png)
