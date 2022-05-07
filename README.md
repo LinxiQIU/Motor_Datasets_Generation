@@ -37,10 +37,10 @@ blender -b -P path/of/point_cloud_generation.py -- -i path/of/input -o path/of/o
 | -o   | path of save directory                                  | string     | obligatory |
 | -clp | path of clamping system                                 | string     | obligatory |
 | -ss   | whether to save scene file (default=True)               | boolean    | optional   |
-| -sf   | scene file format, option: numpy, pcd, both (default: numpy)  | string | optional |
-| -bb   | whether to save 3D bounding box of motor (default=True)    | boolean |  optional  |
+| -sf   | scene file format, option: npy, pcd, both (default: npy)  | string | optional |
+| -bb   | whether to save 3D bounding box of motor (default=False)    | boolean |  optional  |
 | -sc   | whether to save cuboid file (default=True)     | boolen | optional |
-| -cf   | cuboid file format, option: numpy, pcd, both (default: numpy)  | string | optional |
+| -cf   | cuboid file format, option: npy, pcd, both (default: npy)  | string | optional |
 | -roim | default=False: apply random rotation info and save. True: load rotation info from given csv file  | boolen  | optional |
 | -csvp | if -roim is False, save directory of rotation info.(default is save directory). if -roim is True, path of given csv file | string | optional/obligatory |
 | -n    | number of total generation (an integer multiple of 5)     | integer | obligatory  |

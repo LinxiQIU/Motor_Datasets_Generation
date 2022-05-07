@@ -163,7 +163,7 @@ def rename_element(element_type):  # element_type = ['Clamping', 'Motor']
     if element_type == 'Clamping':
         for i in range(len(bpy.data.objects)):
             if 'Cylinder' in bpy.data.objects[i].name:
-                bpy.data.objects[i].name = '0000_Clamping_' + 'Cylinder'
+                bpy.data.objects[i].name = '0000_Clamping_' + 'cylinder'
             if 'PLC' in bpy.data.objects[i].name:
                 bpy.data.objects[i].name = '0000_Clamping_' + 'plc_enclosure'
             if 'Left_fixed' in bpy.data.objects[i].name:
@@ -171,9 +171,9 @@ def rename_element(element_type):  # element_type = ['Clamping', 'Motor']
             if 'Clamping_Right' in bpy.data.objects[i].name:
                 bpy.data.objects[i].name = '0000_Clamping_' + 'countpart_right_clamp'
             if 'Slider_part' in bpy.data.objects[i].name:
-                bpy.data.objects[i].name = '0000_Clamping_' + 'Slider'
+                bpy.data.objects[i].name = '0000_Clamping_' + 'slider'
             if 'Pneumatic_Assembly' in bpy.data.objects[i].name:
-                bpy.data.objects[i].name = '0000_Clamping_' + 'Pneumatic'
+                bpy.data.objects[i].name = '0000_Clamping_' + 'pneumatic'
             if 'Plate' in bpy.data.objects[i].name:
                 bpy.data.objects[i].name = '0000_Clamping_' + 'plate'
             if 'operator_panel&duct' in bpy.data.objects[i].name:
@@ -184,10 +184,10 @@ def rename_element(element_type):  # element_type = ['Clamping', 'Motor']
     elif element_type == 'Motor':
         for i in range(len(bpy.data.objects)):
             if ('Bolt_0' in bpy.data.objects[i].name) or ('Bolt_1' in bpy.data.objects[i].name):
-                bpy.data.objects[i].name = '7777_side_bolt_' + str(k)
+                bpy.data.objects[i].name = '6666_side_bolt_' + str(k)
                 k += 1
             elif 'Bolt' in bpy.data.objects[i].name:
-                bpy.data.objects[i].name = '6666_cover_bolt_' + str(k)
+                bpy.data.objects[i].name = '7777_cover_bolt_' + str(k)
                 k += 1
             elif 'Bottom' in bpy.data.objects[i].name:
                 bpy.data.objects[i].name = '5555_bottom'
@@ -357,9 +357,8 @@ def init_cam_position(random_cam_info):
 def add_tile():
     bpy.ops.object.select_all(action='DESELECT')
     bpy.ops.surface.primitive_nurbs_surface_surface_add(radius=0.15, view_align=False, enter_editmode=False,
-                                                        location=(0, 0, 0), layers=(
-        True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False,
-        False, False, False, False))
+            location=(0, 0, 0), layers=(True, False, False, False, False, False, False, False, False, False,
+                                        False, False, False, False, False, False, False, False, False, False))
     bpy.data.objects['SurfPatch'].name = '0000_SurfPatch'
     bpy.ops.object.select_all(action='DESELECT')
 
@@ -467,7 +466,7 @@ def Initial_motor_position(Motor_type, Bottom_length, Motor_deflection):
                                 proportional_edit_falloff='SMOOTH', proportional_size=1)
 
 
-def random_Clymping_position():
+def random_clamping_position():
     clySlider_location_x = random.uniform(-0.1, 0.2)
     clySlider_location_y = random.uniform(-0.3, 0.2)
     clyfoundation_for_slider_y = clySlider_location_y + random.uniform(-0.1, 0.1)
@@ -481,28 +480,30 @@ def random_Clymping_position():
     pillar_y = random.uniform(-0.05, 0.15)
     pillar_z = random.uniform(-0.03, 0.03)
 
-    cylinder_x = random.uniform(-0.05, 0.05)
+    cylinder_x = random.uniform(-0.05, 0.15)
+    cylinder_y = random.uniform(0.05, 0.1)
+    cylinder_z = random.uniform(-0.15, 0)
 
     bpy.ops.object.select_all(action='DESELECT')
     bpy.data.objects['0000_Clamping_foundation_left_clamp'].location = (
-    clySlider_location_x, clyfoundation_for_slider_y, clyfoundation_for_slider_z)
-    bpy.data.objects['0000_Clamping_Slider'].location = (
-    clySlider_location_x, clySlider_location_y, clyfoundation_for_slider_z)
+        clySlider_location_x, clyfoundation_for_slider_y, clyfoundation_for_slider_z)
+    bpy.data.objects['0000_Clamping_slider'].location = (
+        clySlider_location_x, clySlider_location_y, clyfoundation_for_slider_z)
     bpy.data.objects['0000_Clamping_countpart_right_clamp'].location = (
-    clycounter_for_slider_x, clycounter_for_slider_y, clycounter_for_slider_z)
+        clycounter_for_slider_x, clycounter_for_slider_y, clycounter_for_slider_z)
     bpy.data.objects['0000_Clamping_pillar'].location = (pillar_x, pillar_y, pillar_z)
-    bpy.data.objects['0000_Clamping_Cylinder'].location = (cylinder_x, 0, 0)
-    cly_info = [str(clySlider_location_x), str(clySlider_location_y), str(clyfoundation_for_slider_z)]
-    return cly_info
+    bpy.data.objects['0000_Clamping_cylinder'].location = (cylinder_x, cylinder_y, cylinder_z)
+    # cly_info = [str(clySlider_location_x), str(clySlider_location_y), str(clyfoundation_for_slider_z)]
+    # return cly_info
 
 
-def original_Clymping_position():
+def original_clamping_position():
     bpy.ops.object.select_all(action='DESELECT')
     bpy.data.objects['0000_Clamping_foundation_left_clamp'].location = (0, 0, 0)
-    bpy.data.objects['0000_Clamping_Slider'].location = (0, 0, 0)
+    bpy.data.objects['0000_Clamping_slider'].location = (0, 0, 0)
     bpy.data.objects['0000_Clamping_countpart_right_clamp'].location = (0, 0, 0)
     bpy.data.objects['0000_Clamping_pillar'].location = (0, 0, 0)
-    bpy.data.objects['0000_Clamping_Cylinder'].location = (0, 0, 0)
+    bpy.data.objects['0000_Clamping_cylinder'].location = (0, 0, 0)
 
 
 #############################cut the cuboids####################################
@@ -621,20 +622,20 @@ def add_noise(patch_motor):
     return patch_motor
 
 
-def change_intoPointNet(wholescene, noise):
-    if noise:
+def change_intoPointNet(wholescene, noise=True):
+    if noise is True:
         cor = wholescene[:, 5:8]
     else:
         cor = wholescene[:, 2:5]
     color = wholescene[:, 9:12]
-    lable = np.array([wholescene[:, 8]])
-    new = np.concatenate((cor, color, lable.T), axis=1)
+    label = np.array([wholescene[:, 8]])
+    new = np.concatenate((cor, color, label.T), axis=1)
     return new
 
 
-def raw2scene(raw_data, noise):
+def raw2scene(raw_data, noise=True):
     patch = []
-    if (noise):
+    if noise is True:
         for point in raw_data:
             noise_x = random.uniform(-0.001, 0.001)
             noise_y = random.uniform(-0.001, 0.001)
@@ -652,12 +653,12 @@ def raw2scene(raw_data, noise):
 
 
 def cut(data_to_cut, noise, camera_position_now):
-    cly_bottom = random.uniform(0.15, 0.45)
-    noise_xmin = random.uniform(-0.2, 0.12)
-    noise_xmax = random.uniform(-0.32, 0.2)
-    noise_ymin = random.uniform(-0.3, 0.15)
-    noise_ymax = random.uniform(-0.1, 0.35)
-    Corners = [(-1.8 + noise_xmin, -0.2 + noise_ymin, 1.4), (-0.25 + noise_xmax, -0.2 + noise_ymin, 1.4),
+    cly_bottom = random.uniform(0.62, 0.78)
+    noise_xmin = random.uniform(-0.2, 0.1)
+    noise_xmax = random.uniform(-0.2, 0.15)
+    noise_ymin = random.uniform(-0.05, 0.1)
+    noise_ymax = random.uniform(-0.1, 0.05)
+    Corners = [(-1.8 + noise_xmin, -0.2 + noise_ymin, 1.4), (-0.2 + noise_xmax, -0.2 + noise_ymin, 1.4),
                (-0.2 + noise_xmax, 0.65 + noise_ymax, 1.4), (-1.8 + noise_xmin, 0.65 + noise_ymax, 1.4),
                (-1.8 + noise_xmin, -0.2 + noise_ymin, cly_bottom), (-0.2 + noise_xmax, -0.2 + noise_ymin, cly_bottom),
                (-0.2 + noise_xmax, 0.65 + noise_ymax, cly_bottom), (-1.8 + noise_xmin, 0.65 + noise_ymax, cly_bottom)]
@@ -675,7 +676,6 @@ def cut(data_to_cut, noise, camera_position_now):
     panel_6 = get_panel(cor_inCam[2], cor_inCam[3], cor_inCam[6])
     panel_list = {'panel_up': panel_1, 'panel_bot': panel_2, 'panel_front': panel_3, 'panel_behind': panel_4,
                   'panel_right': panel_5, 'panel_left': panel_6}
-
     patch_motor = []
     for point in data_to_cut:
         if not noise:
@@ -684,20 +684,20 @@ def cut(data_to_cut, noise, camera_position_now):
             point_cor = (point[5], point[6], point[7])
         if set_BoundingBox(panel_list, point_cor):
             patch_motor.append(point)
-    if (noise):
+    if noise is True:
         patch_motor = add_noise(patch_motor)
     patch_motor = change_intoPointNet(np.array(patch_motor), noise=noise)  # resort the file information N*13 -> N*7
     return patch_motor
 
 
-def scene_choice(save_dir, Motor_type, sequence_Motor,numpy_name, scene_format, filtered,
+def scene_choice(save_dir, Motor_type, sequence_Motor, numpy_name, scene_format, filtered,
                  cam_info, motor_info, save_bbox=False):
     filtered1 = raw2scene(raw_data=filtered, noise=False)
     np.save(save_dir + '\\' + numpy_name + '_scene', filtered1)
     if save_bbox is True:
         scene_pc = np.load(save_dir + '\\' + numpy_name + '_scene.npy')
-        bbox = get_3d_bbox(scene_pc, cam_info, motor_info,
-                           Motor_type, sequence_Motor, bbox_path=save_dir, save_bbox=save_bbox)
+        bbox = get_3d_bbox(scene_pc, cam_info, motor_info, Motor_type, sequence_Motor,
+                           bbox_path=save_dir, save_bbox=save_bbox)
     if scene_format == 'both':
         scene_pc = np.load(save_dir + '\\' + numpy_name + '_scene' + '.npy')
         points2pcd(save_dir + '\\' + numpy_name + '_scene.pcd', scene_pc)
@@ -707,7 +707,7 @@ def scene_choice(save_dir, Motor_type, sequence_Motor,numpy_name, scene_format, 
         os.remove(save_dir + '\\' + numpy_name + '_scene.npy')
 
 
-def cuboid_choice(save_dir, numpy_name, cuboid_format, filtered, cam_info, noise=False):
+def cuboid_choice(save_dir, numpy_name, cuboid_format, filtered, cam_info, noise=True):
     filtered2 = cut(data_to_cut=filtered, noise=noise, camera_position_now=cam_info)
     np.save(save_dir + '\\' + numpy_name + '_cuboid', filtered2)
     if cuboid_format == 'both':
@@ -720,18 +720,17 @@ def cuboid_choice(save_dir, numpy_name, cuboid_format, filtered, cam_info, noise
 
 
 def scan_cut(save_dir, Motor_type, sequence_Motor, list_original, list_noNoise, validation_list, cam_info, motor_info,
-             save_scene=True, save_cuboid=True, scene_format='numpy', cuboid_format='numpy', save_bbox=False):
+             save_scene=True, save_cuboid=True, scene_format='npy', cuboid_format='npy', save_bbox=False):
     bpy.ops.object.select_all(action='DESELECT')
     bpy.context.scene.camera = bpy.data.objects['Camera']
     bpy.data.objects['Camera'].select = True
     bpy.context.scene.objects.active = bpy.data.objects['Camera']
     scanner = bpy.data.objects['Camera']
-    sigma = random.uniform(0.002, 0.006)
-    if save_bbox is True:
-        create_bbox_csv(save_dir)
-    if (int(sequence_Motor) in list_original):
+    sigma1 = random.uniform(0, 0.003)
+    sigma2 = random.uniform(0.003, 0.006)
+    if int(sequence_Motor) in list_original:
         saved_numpy_path = save_dir + '\\' + 'Training_' + Motor_type + '_' + sequence_Motor + '_original.numpy'
-        blensor.tof.scan_advanced(scanner, tof_res_x=1280, tof_res_y=960, evd_file=saved_numpy_path, noise_sigma=0)
+        blensor.tof.scan_advanced(scanner, tof_res_x=1280, tof_res_y=960, evd_file=saved_numpy_path, noise_sigma=sigma1)
         if int(sequence_Motor) not in validation_list:
             numpy_name = 'Training_' + Motor_type + '_' + sequence_Motor + '_augmentation1'
         else:
@@ -744,13 +743,14 @@ def scan_cut(save_dir, Motor_type, sequence_Motor, list_original, list_noNoise, 
         filtered = ChangeLabel(filtered)
         filtered = Resort_IDX(filtered)
         if save_scene is True:
-            scene_choice(save_dir, numpy_name, scene_format, filtered, cam_info, motor_info, save_bbox=save_bbox)
+            scene_choice(save_dir, Motor_type, sequence_Motor,numpy_name, scene_format, filtered,
+                         cam_info, motor_info, save_bbox=save_bbox)
         if save_cuboid is True:
-            cuboid_choice(save_dir, numpy_name, cuboid_format, filtered, cam_info, noise=False)
+            cuboid_choice(save_dir, numpy_name, cuboid_format, filtered, cam_info, noise=True)
         os.remove(motorNumpy_file)
-    elif (int(sequence_Motor) in list_noNoise):
+    elif int(sequence_Motor) in list_noNoise:
         saved_numpy_path = save_dir + '\\' + 'Training_' + Motor_type + '_' + sequence_Motor + '_nonoise.numpy'
-        blensor.tof.scan_advanced(scanner, tof_res_x=1280, tof_res_y=960, evd_file=saved_numpy_path, noise_sigma=0)
+        blensor.tof.scan_advanced(scanner, tof_res_x=1280, tof_res_y=960, evd_file=saved_numpy_path, noise_sigma=sigma1)
         if int(sequence_Motor) not in validation_list:
             numpy_name = 'Training_' + Motor_type + '_' + sequence_Motor + '_augmentation2'
         else:
@@ -763,13 +763,14 @@ def scan_cut(save_dir, Motor_type, sequence_Motor, list_original, list_noNoise, 
         filtered = ChangeLabel(filtered)
         filtered = Resort_IDX(filtered)
         if save_scene is True:
-            scene_choice(save_dir, numpy_name, scene_format, filtered, cam_info, motor_info, save_bbox=False)
+            scene_choice(save_dir, Motor_type, sequence_Motor, numpy_name, scene_format, filtered,
+                         cam_info, motor_info, save_bbox=save_bbox)
         if save_cuboid is True:
-            cuboid_choice(save_dir, numpy_name, cuboid_format, filtered, cam_info, noise=False)
+            cuboid_choice(save_dir, numpy_name, cuboid_format, filtered, cam_info, noise=True)
         os.remove(motorNumpy_file)
     else:
         saved_numpy_path = save_dir + '\\' + 'Training_' + Motor_type + '_' + sequence_Motor + '_noise.numpy'
-        blensor.tof.scan_advanced(scanner, tof_res_x=1280, tof_res_y=960, evd_file=saved_numpy_path, noise_sigma=sigma)
+        blensor.tof.scan_advanced(scanner, tof_res_x=1280, tof_res_y=960, evd_file=saved_numpy_path, noise_sigma=sigma2)
         if int(sequence_Motor) not in validation_list:
             numpy_name = 'Training_' + Motor_type + '_' + sequence_Motor + '_augmentation3'
         else:
@@ -782,7 +783,8 @@ def scan_cut(save_dir, Motor_type, sequence_Motor, list_original, list_noNoise, 
         filtered = ChangeLabel(filtered)
         filtered = Resort_IDX(filtered)
         if save_scene is True:
-            scene_choice(save_dir, numpy_name, scene_format, filtered, cam_info, motor_info, save_bbox=False)
+            scene_choice(save_dir, Motor_type, sequence_Motor, numpy_name, scene_format, filtered,
+                         cam_info, motor_info, save_bbox=save_bbox)
         if save_cuboid is True:
             cuboid_choice(save_dir, numpy_name, cuboid_format, filtered, cam_info, noise=True)
         os.remove(motorNumpy_file)
@@ -796,8 +798,8 @@ def delete_motor_elements():
     '''
     filter_keep = ['Camera', '0000_Clamping_plc_enclosure', '0000_Clamping_foundation_left_clamp',
                    '0000_Clamping_countpart_right_clamp',
-                   '0000_Clamping_Slider', '0000_Clamping_Pneumatic', '0000_Clamping_plate',
-                   '0000_Clamping_operator_panel', '0000_Clamping_pillar', '0000_Clamping_Cylinder', '0000_Plane',
+                   '0000_Clamping_slider', '0000_Clamping_pneumatic', '0000_Clamping_plate',
+                   '0000_Clamping_operator_panel', '0000_Clamping_pillar', '0000_Clamping_cylinder', '0000_Plane',
                    '0000_SurfPatch']
     for obj in bpy.data.objects:
         if not obj.name in filter_keep:
@@ -828,9 +830,7 @@ def random_list(num_motors):
     return list_noise, list_original, list_noNoise, validation_list
 
 
-def main():
-    global Cam_info_all, motor_deflection_all
-    p = 3.1416 / 180
+def parse_opt():
     argv = sys.argv
     if "--" not in argv:
         argv = []
@@ -848,7 +848,7 @@ def main():
         '-o', '--output', dest='save_path', metavar='FILE', help="path to the output dir"
     )
     parser.add_argument(
-        '-clp', dest='clamping_path', metavar='FILE', default="E:\\motor_dataset-master\\clamping_system",
+        '-clp', dest='clamping_path', metavar='FILE', default="E:\motor_dataset-master\clamping_system",
         help="path to the clamping system"
     )
     parser.add_argument(
@@ -859,7 +859,7 @@ def main():
         help="set the scene file format"
     )
     parser.add_argument(
-        '-bb', '--bbox', action='store_false', help="whether to save 3D bounding box of the motor in the scene file"
+        '-bb', '--bbox', action='store_true', help="whether to save 3D bounding box of the motor in the scene file"
     )
     parser.add_argument(
         '-sc', dest='save_cuboid', action='store_false', help="whether to save the cuboid file"
@@ -869,11 +869,11 @@ def main():
         help='set the cuboid file format'
     )
     parser.add_argument(
-        '-roim', dest='rotation_from_image', action='store_true',
+        '-ri', dest='rotation_from_image', action='store_true',
         help="random rotation of camera and motor from image"
     )
     parser.add_argument(
-        '-csvp', dest='csv_path', metavar='FILE', help="path to camera motor setting"
+        '-cp', dest='csv_path', metavar='FILE', help="path to camera motor setting"
     )
     parser.add_argument(
         '-n', '--num', type=int, help='total generation number'
@@ -885,10 +885,18 @@ def main():
         parser.error('Total generation number must be an integer multiple of 5!')
     if args.csv_path is None:
         args.csv_path = args.save_path
+    return args
+
+
+def main(args):
+    global Cam_info_all, motor_deflection_all
+    p = 3.1416 / 180
+    ########### route to save file#####################
+    save_path = args.save_path
     ##########      the obj not to load     ############
     filters = ["Motor.obj"]
 
-    ##########      the route to load motor     ###############################################################################
+    ##########      the route to load motor     #####################
     file_base = args.motor_path
     list_types_motor = os.listdir(file_base)
     # delete mos defaut hiden files
@@ -901,25 +909,24 @@ def main():
         motor_deflection_all = read_MotorDeflection(args.csv_path + '\\camera_motor_setting.csv')
     else:
         create_csv(args.csv_path)
-    for Motor_type in list_types_motor:
-
-        ########### route to save file#####################
-        save_path = args.save_path
+    if args.bbox is True:
+        create_bbox_csv(save_path)
+    for motor_type in list_types_motor:
 
         ##############  directories to load motor##############
-        file_path = file_base + '\\' + Motor_type
+        file_path = file_base + '\\' + motor_type
         List_motor = os.listdir(file_path)
         # delete unneeded files
         if 'data.csv' in List_motor:
             List_motor.remove('data.csv')
         List_motor.sort()
 
-        #####################   import and inital all needed components     ###########
+        #####################   import clamping system     ###########
         initial_clamp(args.clamping_path)
 
         ###################       get the needed data from data.csv     ############
         sub_BottomLength_all = read_subBottomLength(file_path + '\\data.csv')
-        BottomLength_all = read_bottomLength(file_path + '\\data.csv')
+        bottomLength_all = read_bottomLength(file_path + '\\data.csv')
 
         list_noise, list_original, list_noNoise, validation = random_list(iteration_times_eachtype)
         ###################################################
@@ -937,28 +944,28 @@ def main():
             save_dir = save_path
             k = dirs.split('_')
             sub_BottomLength = sub_BottomLength_all[int(k[1]) - 1]
-            BottomLength = BottomLength_all[int(k[1]) - 1]
-            if (int(k[1]) in list_original):
+            bottomLength = bottomLength_all[int(k[1]) - 1]
+        ######## Randomly change the position of each part of the clamp
+            if int(k[1]) in list_original:
                 bpy.data.objects['0000_SurfPatch'].location = (0, 0, 4)
                 cover_position = [0, 0, 4]
             else:
-                cover_position = random_cover_position(Bottom_length=sub_BottomLength + BottomLength,
-                                                       Motor_Type=Motor_type)
-            random_cly_info = []
-            if (int(k[1]) not in list_original):
-                random_cly_info = random_Clymping_position()
+                cover_position = random_cover_position(Bottom_length=sub_BottomLength + bottomLength,
+                                                       Motor_Type=motor_type)
+            if int(k[1]) not in list_original:
+                random_clamping_position()
             else:
-                original_Clymping_position()
+                original_clamping_position()
             import_MotorPart_obj(Motor_path, filters)
             if args.rotation_from_image is True:
                 random_cam_info = list(map(float, Cam_info_all[int(k[1])]))
                 motor_deflection = list(map(float, motor_deflection_all[int(k[1])]))
                 random_cam_info = init_cam_position(random_cam_info)
-                Initial_motor_position(Motor_type, BottomLength, motor_deflection)
+                Initial_motor_position(motor_type, bottomLength, motor_deflection)
             else:
                 random_cam_info = random_CameraPosition(radius_camera=random.uniform(2.8, 3.2))
                 motor_deflection = np.random.uniform([-15 * p, -5 * p, -5 * p], [15 * p, 5 * p, 5 * p])
-                Initial_motor_position(Motor_type, BottomLength, motor_deflection)
+                Initial_motor_position(motor_type, bottomLength, motor_deflection)
                 random_info = random_cam_info
                 random_info.extend(motor_deflection)
                 random_info = ['{:.6f}'.format(i) for i in random_info]
@@ -970,12 +977,13 @@ def main():
 
             if not os.path.exists(save_dir):
                 os.makedirs(save_dir)
-            scan_cut(save_dir=save_dir, Motor_type=Motor_type, sequence_Motor=k[1], list_original=list_original,
+            scan_cut(save_dir=save_dir, Motor_type=motor_type, sequence_Motor=k[1], list_original=list_original,
                      list_noNoise=list_noNoise, validation_list=validation, cam_info=random_cam_info,
                      motor_info=motor_deflection, save_scene=args.save_scene, save_cuboid=args.save_cuboid,
                      scene_format=args.scene_file_format, cuboid_format=args.cuboid_file_format, save_bbox=args.bbox)
-            flag = flag + 1
+            flag += 1
 
 
 if __name__ == '__main__':
-    main()
+    opt = parse_opt()
+    main(opt)
