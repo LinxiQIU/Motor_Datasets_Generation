@@ -26,7 +26,7 @@ To generate the point cloud dataset, we are using [Blensor_1.0.18_RC_10_Windows]
 > First of all, copy the 'get_3d_bbox.py' and 'points2pcd.py' into the 'Blensor-1.0.18-Blender-2.79-Winx64/2.79/scripts/modules/'.
 > Then open 'Command Prompt' in Windows, navigate to the Blensor directory and tpye in following command:
 ```python
-blender -b -P path/of/point_cloud_generation.py -- -i path/of/input -o path/of/output -clp path/of/clamping_system -ss(save scene) -sf(scene file format) -bb(3d bounding box) -sc(save cuboid) -cf(cuboid file format) -roim(rotation from image dataset) -csvp path/of/csv -n(number of generation)
+blender -b -P path/of/point_cloud_generation.py -- -i path/of/input -o path/of/output -clp path/of/clamping_system -ss(save scene) -sf(scene file format) -bb(3d bounding box) -sc(save cuboid) -cf(cuboid file format) -ri(rotation from image dataset) -cp path/of/csv -n(number of generation)
 ```
 
 | cmd  | Description          | Type | Property |
@@ -47,7 +47,7 @@ blender -b -P path/of/point_cloud_generation.py -- -i path/of/input -o path/of/o
 
 > The point cloud dataset is composed of scene and cuboid point cloud, `-ss` and `-sc` default is True. If you enter `-sc`, it means sc=False, and the cuboid file will not be saved. We provide both numpy and pcd format, so 'both' should be entered after `-sf` and `-cf` respectively. We use the corresponding camera information saved in the camera_motor_setting.csv to scan the scene in point cloud to maintain correspondence with the image dataset, so `-roim` should set True and the path of csv file from the generated image dataset after `-csvp` must be given. You can also apply random rotation matrices and save it by default. `-n` represents the total number of point cloud files generated, since there are 5 motors in total, each motor will generate n/5 point cloud files. Here is the example command for my dataset.
 ```python
-blender -b -P C:\Users\linux\PycharmProjects\Master\point_cloud_generation.py -- -i E:\motor_mesh_model -o E:\point_cloud_dataset -sf both -cf both -bb -roim -csvp E:\image_dataset_50 -n 50
+blender -b -P C:\Users\linux\PycharmProjects\Master\point_cloud_generation.py -- -i E:\motor_mesh_model -o E:\point_cloud_dataset -sf both -cf both -bb -ri -cp E:\image_dataset_50 -n 50
 ```
 
 > We mark the position of the motor in the point cloud scene with a 3D bounding box, and save the three-dimensional coordinates of the center of each motor and the length, width and height of the entire motor in motor_3D_bounding_box.csv for the deep learning task of 3D object detection by running `vis_point_cloud.py`.
@@ -58,10 +58,10 @@ blender -b -P C:\Users\linux\PycharmProjects\Master\point_cloud_generation.py --
 On the basis of the point cloud dataset in the previous step, we add more random noises to augment data. For example, we add a cover randomly above the motor, randomly move the clamping parts. Here is a sample image for augmented point cloud of cuboid.  
 ![](https://github.com/LinxiQIU/Motor_Datasets_Generation/blob/master/images/cuboid_img.jpg)
 You can get the whole augmented cuboid point cloud dataset by running `augmented_pc_generation.py` with Blensor. 
-> Copy the 'get_3d_bbox.py' and 'points2pcd.py' into the 'Blensor/2.79/scripts/modules/'
+> Copy the `get_3d_bbox.py` and `points2pcd.py` into the `Blensor/2.79/scripts/modules/`
 > Open 'Command Prompt' in Windows, navigate to the Blensor directory and type in following command:
 ```python
-blender -b -P path/of/augmented_pc_generation.py -- -i path/of/input -o path/of/output -clp path/of/clamping_system -ss(save scene) -sf(scene file format) -bb(3d bounding box) -sc(save cuboid) -cf(cuboid file format) -roim(rotation from image dataset) -csvp path/of/csv -n(number of generation)
+blender -b -P path/of/augmented_pc_generation.py -- -i path/of/input -o path/of/output -clp path/of/clamping_system -ss(save scene) -sf(scene file format) -bb(3d bounding box) -sc(save cuboid) -cf(cuboid file format) -ri(rotation from image dataset) -cp path/of/csv -n(number of generation)
 ```
 Here is the example command for the demo.
 ![](https://github.com/LinxiQIU/Motor_Datasets_Generation/blob/master/images/blensor_cmd.png)
