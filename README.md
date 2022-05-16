@@ -38,16 +38,16 @@ blender -b -P path/of/point_cloud_generation.py -- -i path/of/input -o path/of/o
 | -clp | path of clamping system                                 | string     | obligatory |
 | -ss   | whether to save scene file (default=True)               | boolean    | optional   |
 | -sf   | scene file format, option: npy, pcd, both (default: npy)  | string | optional |
-| -bb   | whether to save 3D bounding box of motor (default=False)    | boolean |  optional  |
+| -bb   | whether to save 3D bounding box of motor (default=True)    | boolean |  optional  |
 | -sc   | whether to save cuboid file (default=True)     | boolen | optional |
 | -cf   | cuboid file format, option: npy, pcd, both (default: npy)  | string | optional |
-| -ri | default=False: apply random rotation info and save. True: load rotation info from given csv file  | boolen  | optional |
+| -ri | default=True: apply random rotation info and save. True: load rotation info from given csv file  | boolen  | optional |
 | -cp | if -roim is False, save directory of rotation info.(default is save directory). if -roim is True, path of given csv file | string | optional/obligatory |
 | -n    | number of total generation (an integer multiple of 5)     | integer | obligatory  |
 
-> The point cloud dataset is composed of scene and cuboid point cloud, `-ss` and `-sc` default is True. If you enter `-sc`, it means sc=False, and the cuboid file will not be saved. We provide both numpy and pcd format, so 'both' should be entered after `-sf` and `-cf` respectively. We use the corresponding camera information saved in the camera_motor_setting.csv to scan the scene in point cloud to maintain correspondence with the image dataset, so `-roim` should set True and the path of csv file from the generated image dataset after `-csvp` must be given. You can also apply random rotation matrices and save it by default. `-n` represents the total number of point cloud files generated, since there are 5 motors in total, each motor will generate n/5 point cloud files. Here is the example command for my dataset.
+> The point cloud dataset is composed of scene and cuboid point cloud, `-ss` and `-sc` default is True. If you enter `-sc`, it means sc=False, and the cuboid file will not be saved. We provide both numpy and pcd format, so 'both' should be entered after `-sf` and `-cf` respectively. We use the corresponding camera information saved in the camera_motor_setting.csv to scan the scene in point cloud to maintain correspondence with the image dataset, so `-ri` should set True and the path of csv file from the generated image dataset after `-cp` must be given. You can also apply random rotation matrices and save it by default. `-n` represents the total number of point cloud files generated, since there are 5 motors in total, each motor will generate n/5 point cloud files. Here is the example command for my dataset.
 ```python
-blender -b -P C:\Users\linux\PycharmProjects\Master\point_cloud_generation.py -- -i E:\motor_mesh_model -o E:\point_cloud_dataset -sf both -cf both -bb -ri -cp E:\image_dataset_50 -n 50
+blender -b -P C:\Users\linux\PycharmProjects\Master\point_cloud_generation.py -- -i E:\motor_mesh_model -o E:\point_cloud_dataset -sf both -cf both -cp E:\image_dataset_50 -n 50
 ```
 
 > We mark the position of the motor in the point cloud scene with a 3D bounding box, and save the three-dimensional coordinates of the center of each motor and the length, width and height of the entire motor in motor_3D_bounding_box.csv for the deep learning task of 3D object detection by running `vis_point_cloud.py`.
@@ -63,5 +63,25 @@ You can get the whole augmented cuboid point cloud dataset by running `augmented
 ```python
 blender -b -P path/of/augmented_pc_generation.py -- -i path/of/input -o path/of/output -clp path/of/clamping_system -ss(save scene) -sf(scene file format) -bb(3d bounding box) -sc(save cuboid) -cf(cuboid file format) -ri(rotation from image dataset) -cp path/of/csv -n(number of generation)
 ```
-Here is the example command for the demo.
-![](https://github.com/LinxiQIU/Motor_Datasets_Generation/blob/master/images/blensor_cmd.png)
+
+| cmd  | Description          | Type | Property |
+| ------- | ----------------------------------------------------------| --- | ---------- |
+| -b   | run Blender in background mode                        |       |            |
+| -P   | python script                                          |      |            |
+| -i   | path of motor mesh model                                | string     | obligatory |
+| -o   | path of save directory                                  | string     | obligatory |
+| -clp | path of clamping system                                 | string     | obligatory |
+| -ss   | whether to save scene file (default=False)               | boolean    | optional   |
+| -sf   | scene file format, option: npy, pcd, both (default: npy)  | string | optional |
+| -bb   | whether to save 3D bounding box of motor (default=False)    | boolean |  optional  |
+| -sc   | whether to save cuboid file (default=True)     | boolen | optional |
+| -cf   | cuboid file format, option: npy, pcd, both (default: npy)  | string | optional |
+| -ri | default=False: apply random rotation info and save. True: load rotation info from given csv file  | boolen  | optional |
+| -cp | if -roim is False, save directory of rotation info.(default is save directory). if -roim is True, path of given csv file | string | optional/obligatory |
+| -n    | number of total generation (an integer multiple of 5)     | integer | obligatory  |
+
+Here is the example command for only cuboid numpy file.
+```python
+blender -b -P C:\Users\linux\PycharmProjects\Master\augmented_pc_generation.py -- -i E:\motor_mesh_model -o E:\aug_point50 -clp E:\motor_dataset-master\clamping_system -n 50
+```
+

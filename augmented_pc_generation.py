@@ -70,14 +70,14 @@ def ChangeLabel(x):
                 x[i][8] = int(5)
             elif x[i][8] == 909522486.0:
                 x[i][8] = int(6)
-            elif x[i][8] == 926365495.0:
-                x[i][8] = int(7)
+            # elif x[i][8] == 926365495.0:
+            #     x[i][8] = int(7)
     else:
         print("The cor of numpy is not right")
     return x
 
 
-def Resort_IDX(x):  # reset the IDX Value in the filtered numpy
+def resort_IDX(x):  # reset the IDX Value in the filtered numpy
 
     for i in range(x.shape[0]):
         x[i][-1] = i
@@ -85,7 +85,7 @@ def Resort_IDX(x):  # reset the IDX Value in the filtered numpy
     return x
 
 
-def CutNumpy(x):  # drop the timestamp, yaw, pitch off and the point of (0,0,0)
+def cutNumpy(x):  # drop the timestamp, yaw, pitch off and the point of (0,0,0)
 
     try:
         if x.shape[1] == 16:
@@ -107,9 +107,10 @@ def initial_clamp(Clamping_dir):
 
     if '0000_Clamping' not in objects_name:
         import_ClampingSystem_obj(Clamping_dir)
-
-    if '0000_SurPatch' not in objects_name:
+    if '0000_SurfPatch' not in objects_name:
         add_tile()
+    if '0000_SurfPatch_another' not in objects_name:
+        add_tile_another()
 
 
 def import_MotorPart_obj(path, filters):
@@ -132,8 +133,8 @@ def import_MotorPart_obj(path, filters):
     for i in range(n):
         item = need_file_items[i]
         itemName = need_file_names[i]
-        ufilename = path + "\\" + item
-        bpy.ops.import_scene.obj(filepath=ufilename, filter_glob="*.obj")
+        filename = path + "\\" + item
+        bpy.ops.import_scene.obj(filepath=filename, filter_glob="*.obj")
 
     rename_element('Motor')
     bpy.ops.object.select_all(action='DESELECT')
@@ -141,7 +142,7 @@ def import_MotorPart_obj(path, filters):
     resize_element('Motor')
 
 
-def import_ClampingSystem_obj(path):  # for Blender 2.79-Version: need rename and conbination
+def import_ClampingSystem_obj(path):  # for Blender 2.79-Version: need rename and combination
 
     bpy.ops.import_scene.obj(filepath=path + '\\clamp_counterpart.obj', filter_glob="*.obj")
     bpy.ops.import_scene.obj(filepath=path + '\\foundation_slider.obj', filter_glob="*.obj")
@@ -184,15 +185,15 @@ def rename_element(element_type):  # element_type = ['Clamping', 'Motor']
     elif element_type == 'Motor':
         for i in range(len(bpy.data.objects)):
             if ('Bolt_0' in bpy.data.objects[i].name) or ('Bolt_1' in bpy.data.objects[i].name):
-                bpy.data.objects[i].name = '6666_side_bolt_' + str(k)
+                bpy.data.objects[i].name = '5555_side_bolt_' + str(k)
                 k += 1
             elif 'Bolt' in bpy.data.objects[i].name:
-                bpy.data.objects[i].name = '7777_cover_bolt_' + str(k)
+                bpy.data.objects[i].name = '6666_cover_bolt_' + str(k)
                 k += 1
             elif 'Bottom' in bpy.data.objects[i].name:
-                bpy.data.objects[i].name = '5555_bottom'
+                bpy.data.objects[i].name = '4444_bottom'
             elif 'Charge' in bpy.data.objects[i].name:
-                bpy.data.objects[i].name = '4444_charge'
+                bpy.data.objects[i].name = '3333_charger'
             elif 'Cover' in bpy.data.objects[i].name:
                 bpy.data.objects[i].name = '1111_cover'
             elif 'Gear_Container' in bpy.data.objects[i].name:
@@ -201,30 +202,24 @@ def rename_element(element_type):  # element_type = ['Clamping', 'Motor']
                 bpy.data.objects[i].name = '1111_inner_gear'
 
 
-def initialize_lamp():
-    bpy.ops.object.select_all(action='DESELECT')
-
-    if bpy.data.objects['Point'] and bpy.data.objects['Point.001'] and bpy.data.objects['Point.002']:
-        bpy.data.objects['Point'].select = True
-        bpy.context.scene.objects.active = bpy.data.objects['Point']
-        bpy.context.object.data.energy = 0.8
-        bpy.context.object.data.use_specular = False
-
-        bpy.ops.object.select_all(action='DESELECT')
-
-        bpy.data.objects['Point.001'].select = True
-        bpy.context.scene.objects.active = bpy.data.objects['Point.001']
-        bpy.context.object.data.energy = 0.8
-        bpy.context.object.data.use_specular = False
-
-        bpy.ops.object.select_all(action='DESELECT')
-
-        bpy.data.objects['Point.002'].select = True
-        bpy.context.scene.objects.active = bpy.data.objects['Point.002']
-        bpy.context.object.data.energy = 0.8
-        bpy.context.object.data.use_specular = False
-
-        bpy.ops.object.select_all(action='DESELECT')
+# def init_lamp():
+#     bpy.ops.object.select_all(action='DESELECT')
+#     if bpy.data.objects['Point'] and bpy.data.objects['Point.001'] and bpy.data.objects['Point.002']:
+#         bpy.data.objects['Point'].select = True
+#         bpy.context.scene.objects.active = bpy.data.objects['Point']
+#         bpy.context.object.data.energy = 0.8
+#         bpy.context.object.data.use_specular = False
+#         bpy.ops.object.select_all(action='DESELECT')
+#         bpy.data.objects['Point.001'].select = True
+#         bpy.context.scene.objects.active = bpy.data.objects['Point.001']
+#         bpy.context.object.data.energy = 0.8
+#         bpy.context.object.data.use_specular = False
+#         bpy.ops.object.select_all(action='DESELECT')
+#         bpy.data.objects['Point.002'].select = True
+#         bpy.context.scene.objects.active = bpy.data.objects['Point.002']
+#         bpy.context.object.data.energy = 0.8
+#         bpy.context.object.data.use_specular = False
+#         bpy.ops.object.select_all(action='DESELECT')
 
 
 # Add a plane as the background
@@ -356,26 +351,38 @@ def init_cam_position(random_cam_info):
 
 def add_tile():
     bpy.ops.object.select_all(action='DESELECT')
-    bpy.ops.surface.primitive_nurbs_surface_surface_add(radius=0.15, view_align=False, enter_editmode=False,
-            location=(0, 0, 0), layers=(True, False, False, False, False, False, False, False, False, False,
-                                        False, False, False, False, False, False, False, False, False, False))
+    bpy.ops.surface.primitive_nurbs_surface_surface_add(radius=0.18, view_align=False, enter_editmode=False,
+                                                        location=(0, 0, 0), layers=(
+            True, False, False, False, False, False, False, False, False, False,
+            False, False, False, False, False, False, False, False, False, False))
     bpy.data.objects['SurfPatch'].name = '0000_SurfPatch'
     bpy.ops.object.select_all(action='DESELECT')
 
 
-def random_cover_position(Bottom_length, Motor_Type):
+def add_tile_another():
+    bpy.ops.object.select_all(action='DESELECT')
+    bpy.ops.surface.primitive_nurbs_surface_surface_add(radius=0.15, view_align=False, enter_editmode=False,
+                                                        location=(0, 0, 0), layers=(
+            True, False, False, False, False, False, False, False, False, False,
+            False, False, False, False, False, False, False, False, False, False))
+    bpy.data.objects['SurfPatch'].name = '0000_SurfPatch_another'
+    bpy.ops.object.select_all(action='DESELECT')
+
+
+def random_tile_position(Bottom_length, Motor_Type):
     if 'TypeA' in Motor_Type:
         tile_x = -0.8 - Bottom_length + random.uniform(-0.15, 0.6)
         tile_y = 0.37 + random.uniform(-0.3, 0.2)
     else:
         tile_x = -0.60 - Bottom_length + random.uniform(-0.2, 0.5)
         tile_y = 0.30 + random.uniform(-0.4, 0.35)
-    # tile_x_2 = -0.8 - Bottom_length + random.uniform(-0.1, 0.1)
-    # tile_y_2 = 0.37 + random.uniform(-0.1, 0.1)
+    tile_x_2 = -0.8 - Bottom_length + random.uniform(-0.2, 0.2)
+    tile_y_2 = 0.37 + random.uniform(-0.2, 0.2)
+    tile_z_2 = 1.28 + random.uniform(-0.05, 0.02)
     bpy.data.objects['0000_SurfPatch'].location = (tile_x, tile_y, 1.25)
-    # bpy.data.objects['0000_SurfPatch_another'].location = (tile_x_2, tile_y_2, 1.45)
+    bpy.data.objects['0000_SurfPatch_another'].location = (tile_x_2, tile_y_2, tile_z_2)
     bpy.ops.object.select_all(action='DESELECT')
-    return [str(tile_x), str(tile_y), '1.25']
+    # return [str(tile_x), str(tile_y), '1.25']
 
 
 def resize_element(element_type):  # Resize ClampingSystem to 5 scale and Motor 0.05 scale
@@ -402,7 +409,7 @@ def resize_element(element_type):  # Resize ClampingSystem to 5 scale and Motor 
                                          proportional_edit_falloff='SMOOTH', proportional_size=1)
 
 
-def Initial_motor_position(Motor_type, Bottom_length, Motor_deflection):
+def initial_motor_position(Motor_type, Bottom_length, Motor_deflection):
     bpy.ops.object.select_all(action='DESELECT')
     for obj in bpy.data.objects:
         if ('0000' not in obj.name) and ('Camera' not in obj.name):
@@ -482,7 +489,7 @@ def random_clamping_position():
 
     cylinder_x = random.uniform(-0.05, 0.15)
     cylinder_y = random.uniform(0.05, 0.1)
-    cylinder_z = random.uniform(-0.15, 0)
+    cylinder_z = random.uniform(-0.12, 0.02)
 
     bpy.ops.object.select_all(action='DESELECT')
     bpy.data.objects['0000_Clamping_foundation_left_clamp'].location = (
@@ -528,7 +535,6 @@ def get_Corordinate_inCam(cam_pos_x, cam_pos_y, cam_pos_z, alpha, beta, theta, c
 
 
 def get_3d_bbox(scene_pc, cam_info, motor_info, motor_type, sequence_motor, bbox_path, save_bbox=True):
-    # patch_scene = np.load(scene_npy)
     points = motor_points(scene_pc)
     points_in_blender = transfer_cam2obj(cam_info[0], cam_info[1], cam_info[2], cam_info[3],
                                          cam_info[4], cam_info[5], points)
@@ -603,7 +609,6 @@ def set_BoundingBox(panel_list, point_cor):
                         if panel_list['panel_left'][0] * point_cor[0] + panel_list['panel_left'][1] * point_cor[1] + \
                                 panel_list['panel_left'][2] * point_cor[2] + panel_list['panel_left'][
                             3] >= 0:  # panel 6
-
                             return True
     return False
 
@@ -653,13 +658,13 @@ def raw2scene(raw_data, noise=True):
 
 
 def cut(data_to_cut, noise, camera_position_now):
-    cly_bottom = random.uniform(0.62, 0.78)
+    cly_bottom = random.uniform(0.65, 0.78)
     noise_xmin = random.uniform(-0.2, 0.1)
-    noise_xmax = random.uniform(-0.2, 0.15)
+    noise_xmax = random.uniform(-0.2, 0.1)
     noise_ymin = random.uniform(-0.05, 0.1)
     noise_ymax = random.uniform(-0.1, 0.05)
-    Corners = [(-1.8 + noise_xmin, -0.2 + noise_ymin, 1.4), (-0.2 + noise_xmax, -0.2 + noise_ymin, 1.4),
-               (-0.2 + noise_xmax, 0.65 + noise_ymax, 1.4), (-1.8 + noise_xmin, 0.65 + noise_ymax, 1.4),
+    Corners = [(-1.8 + noise_xmin, -0.2 + noise_ymin, 1.5), (-0.2 + noise_xmax, -0.2 + noise_ymin, 1.5),
+               (-0.2 + noise_xmax, 0.65 + noise_ymax, 1.5), (-1.8 + noise_xmin, 0.65 + noise_ymax, 1.5),
                (-1.8 + noise_xmin, -0.2 + noise_ymin, cly_bottom), (-0.2 + noise_xmax, -0.2 + noise_ymin, cly_bottom),
                (-0.2 + noise_xmax, 0.65 + noise_ymax, cly_bottom), (-1.8 + noise_xmin, 0.65 + noise_ymax, cly_bottom)]
     cor_inCam = []
@@ -692,7 +697,7 @@ def cut(data_to_cut, noise, camera_position_now):
 
 def scene_choice(save_dir, Motor_type, sequence_Motor, numpy_name, scene_format, filtered,
                  cam_info, motor_info, save_bbox=False):
-    filtered1 = raw2scene(raw_data=filtered, noise=False)
+    filtered1 = raw2scene(raw_data=filtered, noise=True)
     np.save(save_dir + '\\' + numpy_name + '_scene', filtered1)
     if save_bbox is True:
         scene_pc = np.load(save_dir + '\\' + numpy_name + '_scene.npy')
@@ -739,11 +744,11 @@ def scan_cut(save_dir, Motor_type, sequence_Motor, list_original, list_noNoise, 
 
         #########  transform the numpy file  #############
         motor_numpy = np.loadtxt(motorNumpy_file)
-        filtered = CutNumpy(motor_numpy)
+        filtered = cutNumpy(motor_numpy)
         filtered = ChangeLabel(filtered)
-        filtered = Resort_IDX(filtered)
+        filtered = resort_IDX(filtered)
         if save_scene is True:
-            scene_choice(save_dir, Motor_type, sequence_Motor,numpy_name, scene_format, filtered,
+            scene_choice(save_dir, Motor_type, sequence_Motor, numpy_name, scene_format, filtered,
                          cam_info, motor_info, save_bbox=save_bbox)
         if save_cuboid is True:
             cuboid_choice(save_dir, numpy_name, cuboid_format, filtered, cam_info, noise=True)
@@ -759,9 +764,9 @@ def scan_cut(save_dir, Motor_type, sequence_Motor, list_original, list_noNoise, 
 
         #########  transform the numpy file  #############
         motor_numpy = np.loadtxt(motorNumpy_file)
-        filtered = CutNumpy(motor_numpy)
+        filtered = cutNumpy(motor_numpy)
         filtered = ChangeLabel(filtered)
-        filtered = Resort_IDX(filtered)
+        filtered = resort_IDX(filtered)
         if save_scene is True:
             scene_choice(save_dir, Motor_type, sequence_Motor, numpy_name, scene_format, filtered,
                          cam_info, motor_info, save_bbox=save_bbox)
@@ -779,9 +784,9 @@ def scan_cut(save_dir, Motor_type, sequence_Motor, list_original, list_noNoise, 
 
         #########  transform the numpy file  #############
         motor_numpy = np.loadtxt(motorNumpy_file)
-        filtered = CutNumpy(motor_numpy)
+        filtered = cutNumpy(motor_numpy)
         filtered = ChangeLabel(filtered)
-        filtered = Resort_IDX(filtered)
+        filtered = resort_IDX(filtered)
         if save_scene is True:
             scene_choice(save_dir, Motor_type, sequence_Motor, numpy_name, scene_format, filtered,
                          cam_info, motor_info, save_bbox=save_bbox)
@@ -797,12 +802,11 @@ def delete_motor_elements():
         Delete all elements except Camera, lamp and clympingsystem
     '''
     filter_keep = ['Camera', '0000_Clamping_plc_enclosure', '0000_Clamping_foundation_left_clamp',
-                   '0000_Clamping_countpart_right_clamp',
-                   '0000_Clamping_slider', '0000_Clamping_pneumatic', '0000_Clamping_plate',
-                   '0000_Clamping_operator_panel', '0000_Clamping_pillar', '0000_Clamping_cylinder', '0000_Plane',
-                   '0000_SurfPatch']
+                   '0000_Clamping_countpart_right_clamp', '0000_Clamping_slider', '0000_Clamping_pneumatic',
+                   '0000_Clamping_plate', '0000_Clamping_operator_panel', '0000_Clamping_pillar',
+                   '0000_Clamping_cylinder', '0000_Plane', '0000_SurfPatch', '0000_SurfPatch_another']
     for obj in bpy.data.objects:
-        if not obj.name in filter_keep:
+        if obj.name not in filter_keep:
             bpy.data.objects.remove(obj)
 
 
@@ -852,7 +856,7 @@ def parse_opt():
         help="path to the clamping system"
     )
     parser.add_argument(
-        '-ss', dest='save_scene', action='store_false', help="whether to save the scene file"
+        '-ss', dest='save_scene', action='store_true', help="whether to save the scene file"
     )
     parser.add_argument(
         '-sf', dest='scene_file_format', type=str, choices=['pcd', 'npy', 'both'], default='npy',
@@ -889,13 +893,12 @@ def parse_opt():
 
 
 def main(args):
-    global Cam_info_all, motor_deflection_all
+    global cam_info_all, motor_deflection_all
     p = 3.1416 / 180
     ########### route to save file#####################
     save_path = args.save_path
     ##########      the obj not to load     ############
     filters = ["Motor.obj"]
-
     ##########      the route to load motor     #####################
     file_base = args.motor_path
     list_types_motor = os.listdir(file_base)
@@ -905,7 +908,7 @@ def main(args):
     list_types_motor.sort()
     iteration_times_eachtype = int(args.num / len(list_types_motor))
     if args.rotation_from_image is True:
-        Cam_info_all = read_CameraPosition(args.csv_path + '\\camera_motor_setting.csv')
+        cam_info_all = read_CameraPosition(args.csv_path + '\\camera_motor_setting.csv')
         motor_deflection_all = read_MotorDeflection(args.csv_path + '\\camera_motor_setting.csv')
     else:
         create_csv(args.csv_path)
@@ -940,32 +943,31 @@ def main(args):
                 delete_motor_elements()
             except KeyError:
                 pass
-            Motor_path = file_path + '\\' + dirs
+            motor_path = file_path + '\\' + dirs
             save_dir = save_path
             k = dirs.split('_')
             sub_BottomLength = sub_BottomLength_all[int(k[1]) - 1]
             bottomLength = bottomLength_all[int(k[1]) - 1]
-        ######## Randomly change the position of each part of the clamp
+            ######## Randomly change the position of each part of the clamp
             if int(k[1]) in list_original:
-                bpy.data.objects['0000_SurfPatch'].location = (0, 0, 4)
-                cover_position = [0, 0, 4]
+                bpy.data.objects['0000_SurfPatch'].location = (0, 0, 4)  # out of the view
+                bpy.data.objects['0000_SurfPatch_another'].location = (0, 0, 4)  # out of the view
             else:
-                cover_position = random_cover_position(Bottom_length=sub_BottomLength + bottomLength,
-                                                       Motor_Type=motor_type)
+                random_tile_position(Bottom_length=sub_BottomLength + bottomLength, Motor_Type=motor_type)
             if int(k[1]) not in list_original:
                 random_clamping_position()
             else:
                 original_clamping_position()
-            import_MotorPart_obj(Motor_path, filters)
+            import_MotorPart_obj(motor_path, filters)
             if args.rotation_from_image is True:
-                random_cam_info = list(map(float, Cam_info_all[int(k[1])]))
+                random_cam_info = list(map(float, cam_info_all[int(k[1])]))
                 motor_deflection = list(map(float, motor_deflection_all[int(k[1])]))
                 random_cam_info = init_cam_position(random_cam_info)
-                Initial_motor_position(motor_type, bottomLength, motor_deflection)
+                initial_motor_position(motor_type, bottomLength, motor_deflection)
             else:
                 random_cam_info = random_CameraPosition(radius_camera=random.uniform(2.8, 3.2))
                 motor_deflection = np.random.uniform([-15 * p, -5 * p, -5 * p], [15 * p, 5 * p, 5 * p])
-                Initial_motor_position(motor_type, bottomLength, motor_deflection)
+                initial_motor_position(motor_type, bottomLength, motor_deflection)
                 random_info = random_cam_info
                 random_info.extend(motor_deflection)
                 random_info = ['{:.6f}'.format(i) for i in random_info]
