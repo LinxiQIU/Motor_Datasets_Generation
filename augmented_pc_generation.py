@@ -371,11 +371,11 @@ def add_tile_another():
 
 def random_tile_position(Bottom_length, Motor_Type):
     if 'TypeA' in Motor_Type:
-        tile_x = -0.8 - Bottom_length + random.uniform(-0.15, 0.6)
-        tile_y = 0.37 + random.uniform(-0.3, 0.2)
+        tile_x = -0.8 - Bottom_length + random.uniform(-0.15, 0.35)
+        tile_y = 0.37 + random.uniform(-0.2, 0.2)
     else:
         tile_x = -0.60 - Bottom_length + random.uniform(-0.2, 0.5)
-        tile_y = 0.30 + random.uniform(-0.4, 0.35)
+        tile_y = 0.30 + random.uniform(-0.35, 0.3)
     tile_x_2 = -0.8 - Bottom_length + random.uniform(-0.2, 0.2)
     tile_y_2 = 0.37 + random.uniform(-0.2, 0.2)
     tile_z_2 = 1.28 + random.uniform(-0.05, 0.02)

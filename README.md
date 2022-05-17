@@ -24,7 +24,7 @@ In each scene, we changed the position and euler rotation of the camera to incre
 ### 3. Point Cloud Dataset Generation
 To generate the point cloud dataset, we are using [Blensor_1.0.18_RC_10_Windows](https://www.blensor.org/pages/downloads.html). Make sure it is installed correctly. Since I am using the Windows version of blensor, if you are using other systems, please pay attention to modifying the address format of the relevant python scripts. You can generate the whole point cloud dataset by running 'point_cloud_generation.py'
 > First of all, copy the 'get_3d_bbox.py' and 'points2pcd.py' into the 'Blensor-1.0.18-Blender-2.79-Winx64/2.79/scripts/modules/'.
-> Then open 'Command Prompt' in Windows, navigate to the Blensor directory and tpye in following command:
+> Then open 'Command Prompt' in Windows, navigate to the Blensor directory and enter the following command:
 ```python
 blender -b -P path/of/point_cloud_generation.py -- -i path/of/input -o path/of/output -clp path/of/clamping_system -ss(save scene) -sf(scene file format) -bb(3d bounding box) -sc(save cuboid) -cf(cuboid file format) -ri(rotation from image dataset) -cp path/of/csv -n(number of generation)
 ```
@@ -80,7 +80,7 @@ blender -b -P path/of/augmented_pc_generation.py -- -i path/of/input -o path/of/
 | -cp | if -roim is False, save directory of rotation info.(default is save directory). if -roim is True, path of given csv file | string | optional/obligatory |
 | -n    | number of total generation (an integer multiple of 5)     | integer | obligatory  |
 
-Here is the example command for only cuboid numpy file.
+Here is an example command line to generate cuboid-only numpy files.
 ```python
 blender -b -P C:\Users\linux\PycharmProjects\Master\augmented_pc_generation.py -- -i E:\motor_mesh_model -o E:\aug_point50 -clp E:\motor_dataset-master\clamping_system -n 50
 ```
