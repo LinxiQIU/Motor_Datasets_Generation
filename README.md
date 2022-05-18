@@ -42,7 +42,7 @@ blender -b -P path/of/point_cloud_generation.py -- -i path/of/input -o path/of/o
 | -sc   | whether to save cuboid file (default=True)     | boolen | optional |
 | -cf   | cuboid file format, option: npy, pcd, both (default: npy)  | string | optional |
 | -ri | default=True: apply random rotation info and save. True: load rotation info from given csv file  | boolen  | optional |
-| -cp | if -roim is False, save directory of rotation info.(default is save directory). if -roim is True, path of given csv file | string | optional/obligatory |
+| -cp | if -ri is False, save directory of rotation info.(default is save directory). if -ri is True, path of given csv file | string | optional/obligatory |
 | -n    | number of total generation (an integer multiple of 5)     | integer | obligatory  |
 
 > The point cloud dataset is composed of scene and cuboid point cloud, `-ss` and `-sc` default is True. If you enter `-sc`, it means sc=False, and the cuboid file will not be saved. We provide both numpy and pcd format, so 'both' should be entered after `-sf` and `-cf` respectively. We use the corresponding camera information saved in the camera_motor_setting.csv to scan the scene in point cloud to maintain correspondence with the image dataset, so `-ri` should set True and the path of csv file from the generated image dataset after `-cp` must be given. You can also apply random rotation matrices and save it by default. `-n` represents the total number of point cloud files generated, since there are 5 motors in total, each motor will generate n/5 point cloud files. Here is the example command for my dataset.
@@ -77,7 +77,7 @@ blender -b -P path/of/augmented_pc_generation.py -- -i path/of/input -o path/of/
 | -sc   | whether to save cuboid file (default=True)     | boolen | optional |
 | -cf   | cuboid file format, option: npy, pcd, both (default: npy)  | string | optional |
 | -ri | default=False: apply random rotation info and save. True: load rotation info from given csv file  | boolen  | optional |
-| -cp | if -roim is False, save directory of rotation info.(default is save directory). if -roim is True, path of given csv file | string | optional/obligatory |
+| -cp | if -ri is False, save directory of rotation info.(default is save directory). if -ri is True, path of given csv file | string | optional/obligatory |
 | -n    | number of total generation (an integer multiple of 5)     | integer | obligatory  |
 
 Here is an example command line to generate cuboid-only numpy files.
