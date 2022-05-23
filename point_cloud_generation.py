@@ -12,7 +12,7 @@ from get_3d_bbox import findpoints, motor_points, \
 from points2pcd import points2pcd
 
 
-def Get_ObjectID(x):  # get all kinds of ObjectID from numpy file
+def get_ObjectID(x):  # get all kinds of ObjectID from numpy file
 
     dic = []
     for i in range(x.shape[0]):
@@ -149,15 +149,15 @@ def rename_element(element_type):  # element_type = ['Clamping', 'Motor']
     elif element_type == 'Motor':
         for i in range(len(bpy.data.objects)):
             if ('Bolt_0' in bpy.data.objects[i].name) or ('Bolt_1' in bpy.data.objects[i].name):
-                bpy.data.objects[i].name = '7777_side_bolt_' + str(k)
+                bpy.data.objects[i].name = '5555_side_bolt_' + str(k)
                 k += 1
             elif 'Bolt' in bpy.data.objects[i].name:
                 bpy.data.objects[i].name = '6666_cover_bolt_' + str(k)
                 k += 1
             elif 'Bottom' in bpy.data.objects[i].name:
-                bpy.data.objects[i].name = '5555_Bottom'
+                bpy.data.objects[i].name = '4444_Bottom'
             elif 'Charge' in bpy.data.objects[i].name:
-                bpy.data.objects[i].name = '4444_Charge'
+                bpy.data.objects[i].name = '3333_Charger'
             elif 'Cover' in bpy.data.objects[i].name:
                 bpy.data.objects[i].name = '1111_Cover'
             elif 'Gear_Container' in bpy.data.objects[i].name:
@@ -218,8 +218,8 @@ def create_csv(csv_path):
     csv_path = csv_path + '\\camera_motor_setting.csv'
     with open(csv_path, 'a+', newline='') as f:
         csv_writer = csv.writer(f)
-        head = ["positionX_camera", "positionY_camera", "positionZ_camera", "eulerX_camera",
-                "eulerY_camera", "eulerZ_camera", "eulerX_motor", "eulerY_motor", "eulerZ_motor"]
+        head = ["camera_positionX", "camera_positionY", "camera_positionZ", "camera_eulerX",
+                "camera_eulerY", "camera_eulerZ", "motor_eulerX", "motor_eulerY", "motor_eulerZ"]
         csv_writer.writerow(head)
 
 
@@ -239,8 +239,8 @@ def read_bottomLength(csv_path):
     with open(csv_path, "r+") as f:
         csv_read = csv.reader(f)
         for line in csv_read:
-            if line[8] != 'mf_Bottom_Length':
-                bottomLength.append(float(line[8]) * 0.05)
+            if line[13] != 'mf_Bottom_Length':
+                bottomLength.append(float(line[13]) * 0.05)
     return bottomLength
 
 
@@ -249,8 +249,8 @@ def read_subBottomLength(csv_path):
     with open(csv_path, "r+") as f:
         csv_read = csv.reader(f)
         for line in csv_read:
-            if line[9] != 'mf_Sub_Bottom_Length':
-                subBottomLength.append(float(line[9]) * 0.05)
+            if line[14] != 'mf_Sub_Bottom_Length':
+                subBottomLength.append(float(line[14]) * 0.05)
     return subBottomLength
 
 
@@ -415,7 +415,7 @@ def init_motor_position(Motor_type, Bottom_length, Motor_deflection):
 
 #############################cut the cuboids####################################
 ################################################################################
-def get_Corordinate_inCam(cam_pos_x, cam_pos_y, cam_pos_z, alpha, beta, theta, cor):
+def get_coordinate_cam(cam_pos_x, cam_pos_y, cam_pos_z, alpha, beta, theta, cor):
     alpha = float(alpha)
     beta = float(beta)
     theta = float(theta)
@@ -560,21 +560,21 @@ def raw2scene(raw_data, noise=True):
 
 
 def cut(data_to_cut, noise, camera_position_now):
-    cly_bottom = random.uniform(0.15, 0.45)
-    noise_xmin = random.uniform(-0.2, 0.12)
-    noise_xmax = random.uniform(-0.32, 0.2)
-    noise_ymin = random.uniform(-0.25, 0.15)
-    noise_ymax = random.uniform(-0.1, 0.35)
-    Corners = [(-1.8 + noise_xmin, -0.2 + noise_ymin, 1.4), (-0.2 + noise_xmax, -0.2 + noise_ymin, 1.4),
+    cly_bottom = random.uniform(0.66, 0.75)
+    noise_xmin = random.uniform(-0.2, 0.1)
+    noise_xmax = random.uniform(-0.2, 0.1)
+    noise_ymin = random.uniform(-0.05, 0.1)
+    noise_ymax = random.uniform(-0.1, 0.05)
+    corners = [(-1.8 + noise_xmin, -0.2 + noise_ymin, 1.4), (-0.2 + noise_xmax, -0.2 + noise_ymin, 1.4),
                (-0.2 + noise_xmax, 0.65 + noise_ymax, 1.4), (-1.8 + noise_xmin, 0.65 + noise_ymax, 1.4),
                (-1.8 + noise_xmin, -0.2 + noise_ymin, cly_bottom), (-0.2 + noise_xmax, -0.2 + noise_ymin, cly_bottom),
                (-0.2 + noise_xmax, 0.65 + noise_ymax, cly_bottom), (-1.8 + noise_xmin, 0.65 + noise_ymax, cly_bottom)]
     cor_inCam = []
-    for corner in Corners:
-        cor_inCam_point = get_Corordinate_inCam(camera_position_now[0], camera_position_now[1], camera_position_now[2],
+    for corner in corners:
+        cor_cam_point = get_coordinate_cam(camera_position_now[0], camera_position_now[1], camera_position_now[2],
                                                 camera_position_now[3], camera_position_now[4], camera_position_now[5],
                                                 corner)
-        cor_inCam.append(cor_inCam_point)
+        cor_inCam.append(cor_cam_point)
     panel_1 = get_panel(cor_inCam[0], cor_inCam[1], cor_inCam[2])
     panel_2 = get_panel(cor_inCam[5], cor_inCam[6], cor_inCam[4])
     panel_3 = get_panel(cor_inCam[0], cor_inCam[3], cor_inCam[4])
@@ -648,7 +648,7 @@ def scan_cut(save_dir, motor_type, sequence_motor, cam_info, motor_info, save_sc
 
 def delete_motor():
     '''
-        Delete all elements except Camera, lamp and clympingsystem
+        Delete all elements except Camera, lamp and clamping system
     '''
     filter_keep = ['Camera', '0000_Clamping_plc_enclosure', '0000_Clamping_foundation_left_clamp',
                    '0000_Clamping_countpart_right_clamp',
@@ -656,7 +656,7 @@ def delete_motor():
                    '0000_Clamping_operator_panel', '0000_Clamping_pillar', '0000_Clamping_Cylinder', '0000_Plane',
                    '0000_SurfPatch']
     for obj in bpy.data.objects:
-        if not obj.name in filter_keep:
+        if obj.name not in filter_keep:
             bpy.data.objects.remove(obj)
 
 
@@ -708,10 +708,10 @@ def parse_opt():
     #     '-vb', dest='vis_bbox', type=bool, default=True, help='visualize 3D bounding box in scene image'
     # )
     parser.add_argument(
-        '-roim', dest='rotation_from_image', action='store_false', help="random rotation of camera and motor from image"
+        '-ri', dest='rotation_from_image', action='store_false', help="random rotation of camera and motor from image"
     )
     parser.add_argument(
-        '-csvp', dest='csv_path', metavar='FILE', help="path to camera motor setting"
+        '-cp', dest='csv_path', metavar='FILE', help="path to camera motor setting"
     )
     parser.add_argument(
         '-n', '--num', type=int, help='total generation number'
@@ -740,7 +740,7 @@ def main(args):
         list_type.remove('motor_parameters.csv')
     list_type.sort()
     iteration = int(args.num / len(list_type))
-    initial_clamp(args.clamping_path)   ### import clamping system
+    initial_clamp(args.clamping_path)  ### import clamping system
     for motor_type in list_type:
         save_path = args.save_path + '\\' + motor_type
         motor_file = file_base + '\\' + motor_type
@@ -748,12 +748,13 @@ def main(args):
         if 'data.csv' in list_motor:
             list_motor.remove('data.csv')
         list_motor.sort()
-    ###################       get the needed data from data.csv     ############
+        ###################       get the needed data from data.csv     ############
         # sub_BottomLength_all = read_subBottomLength(file_path + '\\data.csv')
         bottomLength_all = read_bottomLength(motor_file + '\\data.csv')
         if args.rotation_from_image is True:
-            Cam_info_all = read_CameraPosition(args.csv_path + '\\'+ motor_type + '\\camera_motor_setting.csv')
-            motor_deflection_all = read_MotorDeflection(args.csv_path + '\\' + motor_type + '\\camera_motor_setting.csv')
+            Cam_info_all = read_CameraPosition(args.csv_path + '\\' + motor_type + '\\camera_motor_setting.csv')
+            motor_deflection_all = read_MotorDeflection(
+                args.csv_path + '\\' + motor_type + '\\camera_motor_setting.csv')
         else:
             create_csv(args.csv_path + '\\' + motor_type)
         if args.bbox is True:
@@ -786,7 +787,7 @@ def main(args):
                 random_info = random_cam_info
                 random_info.extend(motor_deflection)
                 random_info = ['{:.6f}'.format(i) for i in random_info]
-                csv_path = args.csv_path + '\\camera_motor_setting.csv'
+                csv_path = args.csv_path + '\\' + motor_type + '\\camera_motor_setting.csv'
                 with open(csv_path, 'a+', newline='') as f:
                     csv_writer = csv.writer(f)
                     random_info = list(map(str, random_info))
