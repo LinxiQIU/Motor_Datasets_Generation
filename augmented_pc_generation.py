@@ -268,7 +268,7 @@ def read_bottomLength(csv_path):
         csv_read = csv.reader(f)
         for line in csv_read:
             if line[8] != 'mf_Bottom_Length':
-                bottomLength.append(float(line[8]) * 0.05)
+                bottomLength.append(float(line[13]) * 0.05)
     return bottomLength
 
 
@@ -278,7 +278,7 @@ def read_subBottomLength(csv_path):
         csv_read = csv.reader(f)
         for line in csv_read:
             if line[9] != 'mf_Sub_Bottom_Length':
-                subBottomLength.append(float(line[9]) * 0.05)
+                subBottomLength.append(float(line[14]) * 0.05)
     return subBottomLength
 
 
