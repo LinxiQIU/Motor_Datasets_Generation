@@ -166,30 +166,30 @@ def rename_element(element_type):  # element_type = ['Clamping', 'Motor']
                 bpy.data.objects[i].name = '1111_Inner_Gear'
 
 
-def initialize_lamp():
-    bpy.ops.object.select_all(action='DESELECT')
+# def initialize_lamp():
+#     bpy.ops.object.select_all(action='DESELECT')
 
-    if bpy.data.objects['Point'] and bpy.data.objects['Point.001'] and bpy.data.objects['Point.002']:
-        bpy.data.objects['Point'].select = True
-        bpy.context.scene.objects.active = bpy.data.objects['Point']
-        bpy.context.object.data.energy = 0.8
-        bpy.context.object.data.use_specular = False
+#     if bpy.data.objects['Point'] and bpy.data.objects['Point.001'] and bpy.data.objects['Point.002']:
+#         bpy.data.objects['Point'].select = True
+#         bpy.context.scene.objects.active = bpy.data.objects['Point']
+#         bpy.context.object.data.energy = 0.8
+#         bpy.context.object.data.use_specular = False
 
-        bpy.ops.object.select_all(action='DESELECT')
+#         bpy.ops.object.select_all(action='DESELECT')
 
-        bpy.data.objects['Point.001'].select = True
-        bpy.context.scene.objects.active = bpy.data.objects['Point.001']
-        bpy.context.object.data.energy = 0.8
-        bpy.context.object.data.use_specular = False
+#         bpy.data.objects['Point.001'].select = True
+#         bpy.context.scene.objects.active = bpy.data.objects['Point.001']
+#         bpy.context.object.data.energy = 0.8
+#         bpy.context.object.data.use_specular = False
 
-        bpy.ops.object.select_all(action='DESELECT')
+#         bpy.ops.object.select_all(action='DESELECT')
 
-        bpy.data.objects['Point.002'].select = True
-        bpy.context.scene.objects.active = bpy.data.objects['Point.002']
-        bpy.context.object.data.energy = 0.8
-        bpy.context.object.data.use_specular = False
+#         bpy.data.objects['Point.002'].select = True
+#         bpy.context.scene.objects.active = bpy.data.objects['Point.002']
+#         bpy.context.object.data.energy = 0.8
+#         bpy.context.object.data.use_specular = False
 
-        bpy.ops.object.select_all(action='DESELECT')
+#         bpy.ops.object.select_all(action='DESELECT')
 
 
 # Add a plane as the background
@@ -725,6 +725,12 @@ def parse_opt():
         parser.error("The csv path of image must be given!")
     if (args.rotation_from_image is False) and (args.csv_path is None):
         args.csv_path = args.save_path
+    if args.motor_path is None:
+        parser.error('Please enter the motor mesh model file path')
+    if args.save_path is None:
+        parser.error('Please enter the output path')
+    if not os.path.exists(args.save_path):
+        os.makedirs(args.save_path)
     if args.num % 5 != 0:
         parser.error('Total generation number must be an integer multiple of 5!')
     return args

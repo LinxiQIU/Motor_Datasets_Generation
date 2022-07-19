@@ -889,6 +889,13 @@ def parse_opt():
         parser.error('Total generation number must be an integer multiple of 5!')
     if args.csv_path is None:
         args.csv_path = args.save_path
+    if args.motor_path is None:
+        parser.error('Please enter the motor mesh model file path')
+    if args.save_path is None:
+        parser.error('Please enter the output path')
+    if not os.path.exists(args.save_path):
+        os.makedirs(args.save_path)
+
     return args
 
 
