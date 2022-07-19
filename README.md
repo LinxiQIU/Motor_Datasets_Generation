@@ -13,13 +13,11 @@ BASE_DIR = '/home/linxi/KIT/Thesis/Dataset/motor_mesh_model_50/'
 num_motor_for_dataset=50
 ```
 ### 2. Image Dataset Generation
-In the image dataset, we merge motors and clamping system to generate 5 images for each scene, which are RGB image, distance image, normal image, semantic segmentated image for each part of the motor and a COCO-annotated image with a 2D bounding box of the motor, for the following tasks of the main project, we also add the 2D bounding box of the bolts. 
-> The scripts here should be running by `blenderproc run script_name.py`. For example, you can generate one set of images for a motor by running the script `try.py`. You shoud set up the path of the clamping system in line 300, specify a motor type and number in line 310, line 311 and line 314 of the script.
-![](https://github.com/LinxiQIU/Bosch-Motors-Dataset-generate/blob/main/try_setup.png)
+In the image dataset, we merge motors and clamping system to generate 5 images for each scene, which are RGB image, distance image, normals image, semantic segmentated image for each part of the motor and a COCO-annotated image with a 2D bounding box of the motor, for the following tasks of the main project, we also add the 2D bounding box of the bolts and motor. 
+> The scripts here should be running by `blenderproc run script_name.py`. You can generate one set of images for a motor by running the script `batch_generation.py`. Because BlenderProc is designed to be rerun multiple times to create a dataset, first you shoud set up the path of the clamping system model, specify a motor type and its path, the number to be generated in main() function. It is recommended to run no more than 40 iterations at one time.
 ```python
-blenderproc run try.py 
+blenderproc run batch_generation.py 
 ```
-> If you want to generate the dataset for the specified motor type, please run the script `batch_generation.py` and set the path of the motor type.
 In each scene, we changed the position and euler rotation of the camera to increase the diversity of the scene. At the same time, we also randomly rotated the motor a little bit to simulate the improper placement of the motor in reality. This information will be saved in the csv file named camera_motor_setting.csv.
 ### 3. Point Cloud Dataset Generation
 To generate the point cloud dataset, we are using [Blensor_1.0.18_RC_10_Windows](https://www.blensor.org/pages/downloads.html). Make sure it is installed correctly. Since I am using the Windows version of blensor, if you are using other systems, please pay attention to modifying the address format of the relevant python scripts. You can generate the whole point cloud dataset by running 'point_cloud_generation.py'
@@ -41,7 +39,7 @@ blender -b -P path/of/point_cloud_generation.py -- -i path/of/input -o path/of/o
 | -bb   | whether to save 3D bounding box of motor (default=True)    | boolean |  optional  |
 | -sc   | whether to save cuboid file (default=True)     | boolen | optional |
 | -cf   | cuboid file format, option: npy, pcd, both (default: npy)  | string | optional |
-| -ri | default=True: apply random rotation info and save. True: load rotation info from given csv file  | boolen  | optional |
+| -ri | default=True: load rotation info from given csv file. False: apply random rotation info and save.  | boolen  | optional |
 | -cp | if -ri is False, save directory of rotation info.(default is save directory). if -ri is True, path of given csv file | string | optional/obligatory |
 | -n    | number of total generation (an integer multiple of 5)     | integer | obligatory  |
 
