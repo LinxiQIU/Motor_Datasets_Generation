@@ -388,23 +388,27 @@ def save_coco(coco_path):
     im.save(os.path.join(output_folder, 'coco_annotated_0.png'), "PNG")
 
 
-def parse_opt():
-    parser = argparse.ArgumentParser(description='Images Dataset Generation')
-    parser.add_argument('-i', 'motor_file', help="Path to the motor file")
-    parser.add_argument('-t', 'motor_type', help="Motor type to choose")
-    parser.add_argument('-s' ,'start_num', help="from which number to start")
-    parser.add_argument('-e' ,'end_num', help="to which number to end")
-    parser.add_argument('-n', 'num', help="total number of specific type")
-    if args.end_num > args.num
-    args = parser.parse_args()
-    return args
+# def parse_opt():
+#     parser = argparse.ArgumentParser(description='Images Dataset Generation')
+#     parser.add_argument('-i', 'motor_file', help="Path to the motor file")
+#     parser.add_argument('-t', 'motor_type', help="Motor type to choose")
+#     parser.add_argument('-s' ,'start_num', help="from which number to start")
+#     parser.add_argument('-e' ,'end_num', help="to which number to end")
+#     parser.add_argument('-n', 'num', help="total number of specific type")
+#     if args.end_num > args.num
+#     args = parser.parse_args()
+#     return args
 
 
-def main(args):
-    num_min = args.start_num
-    num_max = args.end_num
-    if num_max >= args.num:
-        num_max = args.num
+def main():
+    # num_min = args.start_num
+    # num_max = args.end_num
+    # if num_max >= args.num:
+    #     num_max = args.num
+    num_min = 1
+    num_max = num_min + 30
+    if num_max > 200:
+        num_max = 200
     motor_file = '/home/linxi/KIT/Thesis/Dataset/Motors/TypeA0'
     clamping_path = '/home/linxi/KIT/Thesis/Motor_Datasets_Generation/Scene_V1.blend'
     root, motor_type = os.path.split(motor_file)
