@@ -14,6 +14,8 @@ num_motor_for_dataset=50
 ```
 ### 2. Image Dataset Generation
 In the image dataset, we merge motors and clamping system to generate 5 images for each scene, which are RGB image, distance image, normals image, semantic segmentated image for each part of the motor and a COCO-annotated image with a 2D bounding box of the motor, for the following tasks of the main project, we also add the 2D bounding box of the bolts and motor. 
+Here is the demo of motor type A1 
+![](https://github.com/LinxiQIU/Motor_Datasets_Generation/blob/master/images/5_imgs_demo.gif)
 > The scripts here should be running by `blenderproc run script_name.py`. You can generate one set of images for a motor by running the script `batch_generation.py`. Because BlenderProc is designed to be rerun multiple times to create a dataset, first you shoud set up the path of the clamping system model, specify a motor type and its path, the number to be generated in main() function. It is recommended to run no more than 40 iterations at one time.
 ```python
 blenderproc run batch_generation.py 

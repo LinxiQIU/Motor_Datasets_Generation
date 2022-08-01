@@ -7,16 +7,25 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 
 
+# def original_colors():
+#     label
+    
 def vis_PointCloud(sampled, corner_box=None):
     #get only the koordinate from sampled
     sampled = np.asarray(sampled)
     PointCloud_koordinate = sampled[:, 0:3]
-    label=sampled[:,6]
+    label = sampled[:,6]
+    print(label.shape)
     labels = np.asarray(label)
     print(labels.shape)
     max_label = label.max()
     cmap = ListedColormap(["navy", "darkgreen", "lime", "yellow", "orange", "magenta", "red"])
-    colors = plt.get_cmap(cmap)(label / (max_label + 1))
+    cmap_grey = ListedColormap(["grey"])
+    original = sampled[:, 3:6]
+    origin = original/255
+    
+    colors = plt.get_cmap(cmap_grey)(label / (max_label + 1))
+    print(colors)
     if corner_box is not None:    #visuell the point cloud and 3d bounding box
         lines = [[0, 1], [0, 2], [1, 3], [2, 3],
                  [4, 5], [4, 6], [5, 7], [6, 7],
@@ -33,7 +42,7 @@ def vis_PointCloud(sampled, corner_box=None):
     else:
         point_cloud = o3d.geometry.PointCloud()
         point_cloud.points = o3d.utility.Vector3dVector(PointCloud_koordinate)
-        point_cloud.colors = o3d.utility.Vector3dVector(colors[:, :3])
+        point_cloud.colors = o3d.utility.Vector3dVector(colors)
         o3d.visualization.draw_geometries([point_cloud])
 
 
@@ -44,8 +53,12 @@ def save_scene2img(patch_motor, corner_box=None, FileName=None):
     labels = np.asarray(label)
     print(labels.shape)
     max_label = label.max()
-    cmap = ListedColormap(["navy", "darkgreen", "lime", "lavender", "yellow", "orange", "magenta", "red"])
+    cmap = ListedColormap(["navy", "darkgreen", "lime", "yellow", "orange", "red", "red"])
     colors = plt.get_cmap(cmap)(label / (max_label + 1))
+    cmap_grey = ListedColormap(["grey"])
+    original = sampled[:, 3:6]
+    origin = original/255
+    grey = plt.get_cmap(cmap_grey)(label / (max_label + 1))
     point_cloud = o3d.geometry.PointCloud()
     point_cloud.points = o3d.utility.Vector3dVector(PointCloud_koordinate)
     point_cloud.colors = o3d.utility.Vector3dVector(colors[:, :3])
@@ -78,11 +91,15 @@ def save_cuboid2img(patch_motor, FileName=None):
     labels = np.asarray(label)
     print(labels.shape)
     max_label = labels.max()
-    cmap = ListedColormap(["navy", "darkgreen", "lime", "lavender", "yellow", "orange", "magenta","red"])
+    cmap = ListedColormap(["navy", "darkgreen", "lime", "yellow", "orange", "red", "red"])
     colors = plt.get_cmap(cmap)(labels / (max_label if max_label>0 else 1))
+    cmap_grey = ListedColormap(["grey"])
+    original = sampled[:, 3:6]
+    origin = original/255
+    grey = plt.get_cmap(cmap_grey)(label / (max_label + 1))
     point_cloud = o3d.geometry.PointCloud()
     point_cloud.points = o3d.utility.Vector3dVector(PointCloud_koordinate)
-    point_cloud.colors = o3d.utility.Vector3dVector(colors[:, :3])
+    point_cloud.colors = o3d.utility.Vector3dVector(origin)
     vis = o3d.visualization.Visualizer()
     vis.create_window(width=1280, height=960)
     vis.add_geometry(point_cloud)
@@ -169,6 +186,8 @@ def get_bbox(bbox_csv, cam_motor_csv, k):
     return corner_box
 
 
-# s = 'E:\\test\TypeA1\Motor_0038\TypeA1_0038_cuboid.npy'
-# t = np.load(s)
+s = 'E:\\pcA1\\TypeA1\\Motor_0001\\TypeA1_0001_cuboid.npy'
+t = np.load(s)
 # vis_PointCloud(t)
+# save_scene2img(t, FileName='C:\\Users\\linux\\Desktop\\TypeA1_demo\\pc\\TypeA1_0001_scene_label.jpg')
+save_cuboid2img(t, FileName='C:\\Users\\linux\\Desktop\\TypeA1_demo\\pc\\TypeA1_0001_cuboid_origin.jpg')
