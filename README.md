@@ -39,9 +39,9 @@ blender -b -P path/of/point_cloud_generation.py -- -i path/of/input -o path/of/o
 | -ss   | whether to save scene file (default=True)               | boolean    | optional   |
 | -sf   | scene file format, option: npy, pcd, both (default: npy)  | string | optional |
 | -bb   | whether to save 3D bounding box of motor (default=True)    | boolean |  optional  |
-| -sc   | whether to save cuboid file (default=True)     | boolen | optional |
+| -sc   | whether to save cuboid file (default=True)     | boolean | optional |
 | -cf   | cuboid file format, option: npy, pcd, both (default: npy)  | string | optional |
-| -ri | default=True: load rotation info from given csv file. False: apply random rotation info and save.  | boolen  | optional |
+| -ri | default=True: load rotation info from given csv file. False: apply random rotation info and save.  | boolean  | optional |
 | -cp | if -ri is False, save directory of rotation info.(default is save directory). if -ri is True, path of given csv file | string | optional/obligatory |
 | -n    | number of total generation (an integer multiple of 5)     | integer | obligatory  |
 
@@ -52,11 +52,11 @@ blender -b -P C:\Users\linux\PycharmProjects\Master\point_cloud_generation.py --
 
 > We mark the position of the motor in the point cloud scene with a 3D bounding box, and save the three-dimensional coordinates of the center of each motor and the length, width and height of the entire motor in motor_3D_bounding_box.csv for the deep learning task of 3D object detection by running `vis_point_cloud.py`.
 
-![](https://github.com/LinxiQIU/Motor_Datasets_Generation/blob/master/images/scene_img.jpg)
+![](https://github.com/LinxiQIU/Motor_Datasets_Generation/blob/master/images/TypeA1_scene_img.jpg)
 > We provide each motor with both scene and cuboid point cloud in Numpy and PCD format. You can convert the generated Numpy file to PCD by running `points2pcd.py`, if you only generate the default numpy files at the beginning.
 ### 4. Point Cloud Dataset augmentation
 On the basis of the point cloud dataset in the previous step, we add more random noises to augment data. For example, we add a cover randomly above the motor, randomly move the clamping parts. Here is a sample image for augmented point cloud of cuboid.  
-![](https://github.com/LinxiQIU/Motor_Datasets_Generation/blob/master/images/cuboid_img.jpg)
+![](https://github.com/LinxiQIU/Motor_Datasets_Generation/blob/master/images/TypeA1_cuboid_img.jpg)
 You can get the whole augmented cuboid point cloud dataset by running `augmented_pc_generation.py` with Blensor. 
 > Copy the `get_3d_bbox.py` and `points2pcd.py` into the `Blensor/2.79/scripts/modules/`
 > Open 'Command Prompt' in Windows, navigate to the Blensor directory and type in following command:
@@ -74,9 +74,9 @@ blender -b -P path/of/augmented_pc_generation.py -- -i path/of/input -o path/of/
 | -ss   | whether to save scene file (default=False)               | boolean    | optional   |
 | -sf   | scene file format, option: npy, pcd, both (default: npy)  | string | optional |
 | -bb   | whether to save 3D bounding box of motor (default=False)    | boolean |  optional  |
-| -sc   | whether to save cuboid file (default=True)     | boolen | optional |
+| -sc   | whether to save cuboid file (default=True)     | boolean | optional |
 | -cf   | cuboid file format, option: npy, pcd, both (default: npy)  | string | optional |
-| -ri | default=False: apply random rotation info and save. True: load rotation info from given csv file  | boolen  | optional |
+| -ri | default=False: apply random rotation info and save. True: load rotation info from given csv file  | boolean  | optional |
 | -cp | if -ri is False, save directory of rotation info.(default is save directory). if -ri is True, path of given csv file | string | optional/obligatory |
 | -n    | number of total generation (an integer multiple of 5)     | integer | obligatory  |
 

@@ -84,22 +84,27 @@ def save_scene2img(patch_motor, corner_box=None, FileName=None):
     vis.destroy_window()
 
 
-def save_cuboid2img(patch_motor, FileName=None):
+def save_cuboid2img(patch_motor, color='default', FileName=None):
     sampled = np.asarray(patch_motor)
     PointCloud_koordinate = sampled[:, 0:3]
     label=sampled[:,6]
     labels = np.asarray(label)
     print(labels.shape)
     max_label = labels.max()
-    cmap = ListedColormap(["navy", "darkgreen", "lime", "yellow", "orange", "red", "red"])
-    colors = plt.get_cmap(cmap)(labels / (max_label if max_label>0 else 1))
-    cmap_grey = ListedColormap(["grey"])
-    original = sampled[:, 3:6]
-    origin = original/255
-    grey = plt.get_cmap(cmap_grey)(label / (max_label + 1))
+    if color == 'default':
+        cmap = ListedColormap(["navy", "darkgreen", "lime", "yellow", "orange", "magenta", "red"])
+        color = plt.get_cmap(cmap)(label / (max_label if max_label>0 else 1))
+        colors = color[:, :3]
+    elif color == 'grey':
+        cmap_grey = ListedColormap(["grey"])
+        color = plt.get_cmap(cmap_grey)(label / (max_label + 1))
+        colors = color[:, :3]
+    else:
+        origin = sampled[:, 3:6]
+        colors = original/255
     point_cloud = o3d.geometry.PointCloud()
     point_cloud.points = o3d.utility.Vector3dVector(PointCloud_koordinate)
-    point_cloud.colors = o3d.utility.Vector3dVector(origin)
+    point_cloud.colors = o3d.utility.Vector3dVector(colors)
     vis = o3d.visualization.Visualizer()
     vis.create_window(width=1280, height=960)
     vis.add_geometry(point_cloud)
@@ -186,8 +191,8 @@ def get_bbox(bbox_csv, cam_motor_csv, k):
     return corner_box
 
 
-s = 'E:\\pcA1\\TypeA1\\Motor_0001\\TypeA1_0001_cuboid.npy'
+s = 'E:\\pc1000\\TypeA1\\Motor_0001\\TypeA1_0001_cuboid.npy'
 t = np.load(s)
 # vis_PointCloud(t)
 # save_scene2img(t, FileName='C:\\Users\\linux\\Desktop\\TypeA1_demo\\pc\\TypeA1_0001_scene_label.jpg')
-save_cuboid2img(t, FileName='C:\\Users\\linux\\Desktop\\TypeA1_demo\\pc\\TypeA1_0001_cuboid_origin.jpg')
+save_cuboid2img(t, color='grey', FileName='E:\\pc1000\\TypeA1\\Motor_0001\\TypeA1_0001_cuboid_grey.jpg')

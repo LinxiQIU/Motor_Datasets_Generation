@@ -13,7 +13,7 @@ import math
 '''
 Value-distribution:
     Type A_Type 1 :
-                    Bottom Length = 4.00 - 7.80  step = 0.03
+                    Bottom Length = 6.2 - 8.0  step = 0.03
                     Sub Bottom Length = 0.6 - 2  setp = 0.03
                     Lower Gear Dia = 3.5 - 4.5  step = 0.03
                     Lower Gear Position = 3.6 - 4.2
@@ -98,7 +98,7 @@ def create_Motor_Obj_A(Extension_Type_A, Bolt_type_mode, changed_parameter, Uppe
 '''
 Value-distribution:
     Type B :
-                    Bottom Length = 4.00 - 7.80  step = 0.03
+                    Bottom Length = 6.2 - 8.0  step = 0.03
                     Sub Bottom Length = 0.6 - 2  setp = 0.03
                     Lower Gear Dia = 3.5 - 4.5  step = 0.03
                     Lower Gear Position = 3.6 - 4.2
@@ -190,11 +190,13 @@ def main(num_motor):
 
     Upper_Bolt_Nummber_A = ['1', '2','2','3']
     Upper_Bolt_Nummber_B = ['2','3']
-    Corrosion_Type = ['None', 'None', 'None', 'None', 'None', 'None', 'Rust 1', 'Rust 2',  
-                      'Rust 3', 'Rust 4', 'Rust 5', 'Rust 6', 'Rust 7', 'Rust 8', 'Rust 9']
+    # Corrosion_Type = ['None', 'None', 'None', 'None', 'None', 'None', 'Rust 1', 'Rust 2',  
+    #                   'Rust 3', 'Rust 4', 'Rust 5', 'Rust 6', 'Rust 7', 'Rust 8', 'Rust 9']
+    Corrosion_Type = ['None']
+    
     for _ in range(int(num_motor/5)):
         changed_parameter_A = {}
-        changed_parameter_A['changed_BL'] = float(np.random.uniform(4.0, 7.8, 1))          # Bottom_Length
+        changed_parameter_A['changed_BL'] = float(np.random.uniform(6.2, 8.0, 1))          # Bottom_Length
         changed_parameter_A['changed_SBL'] = float(np.random.uniform(0.6, 2.0, 1))         # Sub_Bottom_Length
         changed_parameter_A['changed_LGD'] = float(np.random.uniform(3.5, 4.5, 1))         # Lower_Gear_Diameter
         changed_parameter_A['changed_LGP'] = float(np.random.uniform(3.6, 4.2, 1))         # Lower_Gear_Position
@@ -213,7 +215,7 @@ def main(num_motor):
         ###########################################  
         #   Create Type A Extension 2 Motor       #
         ###########################################
-        changed_parameter_A['changed_BL'] = float(np.random.uniform(4.0, 7.8, 1))          # Bottom_Length
+        changed_parameter_A['changed_BL'] = float(np.random.uniform(6.2, 8.0, 1))          # Bottom_Length
         changed_parameter_A['changed_SBL'] = float(np.random.uniform(0.6, 2.0, 1))         # Sub_Bottom_Length
         changed_parameter_A['changed_LGD'] = float(np.random.uniform(3.5, 4.5, 1))         # Lower_Gear_Diameter
         changed_parameter_A['changed_LGP'] = float(np.random.uniform(3.6, 4.2, 1))         # Lower_Gear_Position
@@ -226,7 +228,7 @@ def main(num_motor):
         ###########################################  
         #   Create Type A Extension None Motor    #
         ###########################################
-        changed_parameter_A['changed_BL'] = float(np.random.uniform(4.0, 7.8, 1))          # Bottom_Length
+        changed_parameter_A['changed_BL'] = float(np.random.uniform(6.2, 8.0, 1))          # Bottom_Length
         changed_parameter_A['changed_SBL'] = float(np.random.uniform(0.6, 2.0, 1))         # Sub_Bottom_Length
         changed_parameter_A['changed_LGD'] = float(np.random.uniform(3.5, 4.5, 1))         # Lower_Gear_Diameter
         changed_parameter_A['changed_LGP'] = float(np.random.uniform(3.6, 4.2, 1))         # Lower_Gear_Position
@@ -238,7 +240,7 @@ def main(num_motor):
 
 
         changed_parameter = {}
-        changed_parameter['changed_BL'] = float(np.random.uniform(4.0, 7.8, 1))          # Bottom_Length
+        changed_parameter['changed_BL'] = float(np.random.uniform(6.2, 8.0, 1))          # Bottom_Length
         changed_parameter['changed_SBL'] = float(np.random.uniform(0.6, 2.0, 1))         # Sub_Bottom_Length
         changed_parameter['changed_LGD'] = float(np.random.uniform(3.5, 4.5, 1))         # Lower_Gear_Diameter
         changed_parameter['changed_LGP'] = float(np.random.uniform(3.6, 4.2, 1))         # Lower_Gear_Position
@@ -257,7 +259,7 @@ def main(num_motor):
         ###########################################  
         #   Create Type B Extension None Motor    #
         ###########################################
-        changed_parameter['changed_BL'] = float(np.random.uniform(4.0, 7.8, 1))          # Bottom_Length
+        changed_parameter['changed_BL'] = float(np.random.uniform(6.2, 8.0, 1))          # Bottom_Length
         changed_parameter['changed_SBL'] = float(np.random.uniform(0.6, 2.0, 1))         # Sub_Bottom_Length
         changed_parameter['changed_LGD'] = float(np.random.uniform(3.5, 4.5, 1))         # Lower_Gear_Diameter
         changed_parameter['changed_LGP'] = float(np.random.uniform(3.6, 4.2, 1))         # Lower_Gear_Position
@@ -272,5 +274,5 @@ def main(num_motor):
 
 
 if __name__ == '__main__':
-    num_motor_for_dataset=10      #   paramater to set dataset size
+    num_motor_for_dataset=1000      #   paramater to set dataset size
     main(num_motor=num_motor_for_dataset)
