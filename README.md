@@ -14,7 +14,7 @@ num_motor_for_dataset=50
 ```
 ### 2. Image Dataset Generation
 In the image dataset, we merge motors and clamping system to generate 5 images for each scene, which are RGB image, distance image, normals image, semantic segmentated image for each part of the motor and a COCO-annotated image with a 2D bounding box of the motor, for the following tasks of the main project, we also add the 2D bounding box of the bolts and motor. 
-Here is the demo of motor type A1 
+Here is the demo of motor type A1:
 ![](https://github.com/LinxiQIU/Motor_Datasets_Generation/blob/master/images/5_imgs_demo.gif)
 > The scripts here should be running by `blenderproc run script_name.py`. You can generate one set of images for a motor by running the script `batch_generation.py`. Because BlenderProc is designed to be rerun multiple times to create a dataset, first you shoud set up the path of the clamping system model, specify a motor type and its path, the number to be generated in main() function. It is recommended to run no more than 40 iterations at one time.
 ```python
@@ -51,12 +51,12 @@ blender -b -P C:\Users\linux\PycharmProjects\Master\point_cloud_generation.py --
 ```
 
 > We mark the position of the motor in the point cloud scene with a 3D bounding box, and save the three-dimensional coordinates of the center of each motor and the length, width and height of the entire motor in motor_3D_bounding_box.csv for the deep learning task of 3D object detection by running `vis_point_cloud.py`.
-
 ![](https://github.com/LinxiQIU/Motor_Datasets_Generation/blob/master/images/TypeA1_scene_img.jpg)
+![](https://github.com/LinxiQIU/Motor_Datasets_Generation/blob/master/images/TypeA1_cuboid_img.jpg)
 > We provide each motor with both scene and cuboid point cloud in Numpy and PCD format. You can convert the generated Numpy file to PCD by running `points2pcd.py`, if you only generate the default numpy files at the beginning.
 ### 4. Point Cloud Dataset augmentation
 On the basis of the point cloud dataset in the previous step, we add more random noises to augment data. For example, we add a cover randomly above the motor, randomly move the clamping parts. Here is a sample image for augmented point cloud of cuboid.  
-![](https://github.com/LinxiQIU/Motor_Datasets_Generation/blob/master/images/TypeA1_cuboid_img.jpg)
+![](https://github.com/LinxiQIU/Motor_Datasets_Generation/blob/master/images/cuboid_augment_img.jpg)
 You can get the whole augmented cuboid point cloud dataset by running `augmented_pc_generation.py` with Blensor. 
 > Copy the `get_3d_bbox.py` and `points2pcd.py` into the `Blensor/2.79/scripts/modules/`
 > Open 'Command Prompt' in Windows, navigate to the Blensor directory and type in following command:

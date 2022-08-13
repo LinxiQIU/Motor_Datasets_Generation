@@ -166,7 +166,7 @@ def create_Motor_Obj_B(Extension_Type_B, Bolt_type_mode, changed_parameter, Gear
             bpy.data.objects.remove(bpy.data.objects['Motor'])
 
 def main(num_motor):
-    BASE_DIR='/home/linxi/KIT/Thesis/Dataset/new_motors/'
+    BASE_DIR='E:\\Motor_1000\\'
     save_dir_TypeA1_origial = BASE_DIR+'TypeA1'
     if not os.path.exists(save_dir_TypeA1_origial):
         os.makedirs(save_dir_TypeA1_origial)
@@ -194,71 +194,78 @@ def main(num_motor):
     #                   'Rust 3', 'Rust 4', 'Rust 5', 'Rust 6', 'Rust 7', 'Rust 8', 'Rust 9']
     Corrosion_Type = ['None']
     
-    for _ in range(int(num_motor/5)):
+    for _ in range(int(num_motor)):
         changed_parameter_A = {}
-        changed_parameter_A['changed_BL'] = float(np.random.uniform(6.2, 8.0, 1))          # Bottom_Length
-        changed_parameter_A['changed_SBL'] = float(np.random.uniform(0.6, 2.0, 1))         # Sub_Bottom_Length
-        changed_parameter_A['changed_LGD'] = float(np.random.uniform(3.5, 4.5, 1))         # Lower_Gear_Diameter
-        changed_parameter_A['changed_LGP'] = float(np.random.uniform(3.6, 4.2, 1))         # Lower_Gear_Position
-        changed_parameter_A['changed_UGD'] = float(np.random.uniform(5, 6.5, 1)) 
-        changed_parameter_A['bolt_corrosion_percent'] = int(np.random.uniform(20, 40))
-        changed_parameter_A['bottom_corrosion_percent'] = int(np.random.uniform(20, 40))
-        num_bolts_A=random.choice(Upper_Bolt_Nummber_A)
-        Bottom_Corrosion=random.choice(Corrosion_Type)
-        Bolt_Corrosion=random.choice(Corrosion_Type)
+        # changed_parameter_A['changed_BL'] = float(np.random.uniform(6.2, 8.0, 1))          # Bottom_Length
+        # changed_parameter_A['changed_SBL'] = float(np.random.uniform(0.6, 2.0, 1))         # Sub_Bottom_Length
+        # changed_parameter_A['changed_LGD'] = float(np.random.uniform(3.5, 4.5, 1))         # Lower_Gear_Diameter
+        # changed_parameter_A['changed_LGP'] = float(np.random.uniform(3.6, 4.2, 1))         # Lower_Gear_Position
+        # changed_parameter_A['changed_UGD'] = float(np.random.uniform(5, 6.5, 1)) 
+        # changed_parameter_A['bolt_corrosion_percent'] = int(np.random.uniform(20, 40))
+        # changed_parameter_A['bottom_corrosion_percent'] = int(np.random.uniform(20, 40))
+        # num_bolts_A=random.choice(Upper_Bolt_Nummber_A)
+        # Bottom_Corrosion=random.choice(Corrosion_Type)
+        # Bolt_Corrosion=random.choice(Corrosion_Type)
         ###########################################  
         #   Create Type A Extension 1 Motor       #
         ###########################################
-        create_Motor_Obj_A(Extension_Type_A = 'mf_Extension_Type_1', Bolt_type_mode = 'Torx', changed_parameter = changed_parameter_A, 
-            Upper_Bolt_Nummber=num_bolts_A, Bottom_Corrosion_Type=Bottom_Corrosion, Bolt_Corrosion_Type=Bolt_Corrosion, save_dir = save_dir_TypeA1_origial)
+        # create_Motor_Obj_A(Extension_Type_A = 'mf_Extension_Type_1', Bolt_type_mode = 'Torx', changed_parameter = changed_parameter_A, 
+        #     Upper_Bolt_Nummber=num_bolts_A, Bottom_Corrosion_Type=Bottom_Corrosion, Bolt_Corrosion_Type=Bolt_Corrosion, save_dir = save_dir_TypeA1_origial)
 
         ###########################################  
         #   Create Type A Extension 2 Motor       #
         ###########################################
-        changed_parameter_A['changed_BL'] = float(np.random.uniform(6.2, 8.0, 1))          # Bottom_Length
-        changed_parameter_A['changed_SBL'] = float(np.random.uniform(0.6, 2.0, 1))         # Sub_Bottom_Length
-        changed_parameter_A['changed_LGD'] = float(np.random.uniform(3.5, 4.5, 1))         # Lower_Gear_Diameter
-        changed_parameter_A['changed_LGP'] = float(np.random.uniform(3.6, 4.2, 1))         # Lower_Gear_Position
-        changed_parameter_A['changed_UGD'] = float(np.random.uniform(5, 6.5, 1))
-        changed_parameter_A['bolt_corrosion_percent'] = int(np.random.uniform(20, 40))
-        changed_parameter_A['bottom_corrosion_percent'] = int(np.random.uniform(20, 40)) 
-        create_Motor_Obj_A(Extension_Type_A = 'mf_Extension_Type_2', Bolt_type_mode = 'Torx', changed_parameter = changed_parameter_A, 
-            Upper_Bolt_Nummber=num_bolts_A, Bottom_Corrosion_Type=Bottom_Corrosion, Bolt_Corrosion_Type=Bolt_Corrosion, save_dir =save_dir_TypeA2_original)
+
+        # changed_parameter_A['changed_BL'] = float(np.random.uniform(6.2, 8.0, 1))          # Bottom_Length
+        # changed_parameter_A['changed_SBL'] = float(np.random.uniform(0.6, 2.0, 1))         # Sub_Bottom_Length
+        # changed_parameter_A['changed_LGD'] = float(np.random.uniform(3.5, 4.5, 1))         # Lower_Gear_Diameter
+        # changed_parameter_A['changed_LGP'] = float(np.random.uniform(3.6, 4.2, 1))         # Lower_Gear_Position
+        # changed_parameter_A['changed_UGD'] = float(np.random.uniform(5, 6.5, 1))
+        # changed_parameter_A['bolt_corrosion_percent'] = int(np.random.uniform(20, 40))
+        # changed_parameter_A['bottom_corrosion_percent'] = int(np.random.uniform(20, 40)) 
+        # num_bolts_A=random.choice(Upper_Bolt_Nummber_A)
+        # Bottom_Corrosion=random.choice(Corrosion_Type)
+        # Bolt_Corrosion=random.choice(Corrosion_Type)
+        # create_Motor_Obj_A(Extension_Type_A = 'mf_Extension_Type_2', Bolt_type_mode = 'Torx', changed_parameter = changed_parameter_A, 
+        #     Upper_Bolt_Nummber=num_bolts_A, Bottom_Corrosion_Type=Bottom_Corrosion, Bolt_Corrosion_Type=Bolt_Corrosion, save_dir =save_dir_TypeA2_original)
 
         ###########################################  
         #   Create Type A Extension None Motor    #
         ###########################################
-        changed_parameter_A['changed_BL'] = float(np.random.uniform(6.2, 8.0, 1))          # Bottom_Length
-        changed_parameter_A['changed_SBL'] = float(np.random.uniform(0.6, 2.0, 1))         # Sub_Bottom_Length
-        changed_parameter_A['changed_LGD'] = float(np.random.uniform(3.5, 4.5, 1))         # Lower_Gear_Diameter
-        changed_parameter_A['changed_LGP'] = float(np.random.uniform(3.6, 4.2, 1))         # Lower_Gear_Position
-        changed_parameter_A['changed_UGD'] = float(np.random.uniform(5, 6.5, 1)) 
-        changed_parameter_A['bolt_corrosion_percent'] = int(np.random.uniform(20, 40))
-        changed_parameter_A['bottom_corrosion_percent'] = int(np.random.uniform(20, 40))
-        create_Motor_Obj_A(Extension_Type_A = 'mf_Extension_Type_None', Bolt_type_mode = 'Torx', changed_parameter = changed_parameter_A, 
-            Upper_Bolt_Nummber=num_bolts_A, Bottom_Corrosion_Type=Bottom_Corrosion, Bolt_Corrosion_Type=Bolt_Corrosion, save_dir = save_dir_TypeANone_original)
 
+        # changed_parameter_A['changed_BL'] = float(np.random.uniform(6.2, 8.0, 1))          # Bottom_Length
+        # changed_parameter_A['changed_SBL'] = float(np.random.uniform(0.6, 2.0, 1))         # Sub_Bottom_Length
+        # changed_parameter_A['changed_LGD'] = float(np.random.uniform(3.5, 4.5, 1))         # Lower_Gear_Diameter
+        # changed_parameter_A['changed_LGP'] = float(np.random.uniform(3.6, 4.2, 1))         # Lower_Gear_Position
+        # changed_parameter_A['changed_UGD'] = float(np.random.uniform(5, 6.5, 1)) 
+        # changed_parameter_A['bolt_corrosion_percent'] = int(np.random.uniform(20, 40))
+        # changed_parameter_A['bottom_corrosion_percent'] = int(np.random.uniform(20, 40))
+        # create_Motor_Obj_A(Extension_Type_A = 'mf_Extension_Type_None', Bolt_type_mode = 'Torx', changed_parameter = changed_parameter_A, 
+        #     Upper_Bolt_Nummber=num_bolts_A, Bottom_Corrosion_Type=Bottom_Corrosion, Bolt_Corrosion_Type=Bolt_Corrosion, save_dir = save_dir_TypeANone_original)
 
-        changed_parameter = {}
-        changed_parameter['changed_BL'] = float(np.random.uniform(6.2, 8.0, 1))          # Bottom_Length
-        changed_parameter['changed_SBL'] = float(np.random.uniform(0.6, 2.0, 1))         # Sub_Bottom_Length
-        changed_parameter['changed_LGD'] = float(np.random.uniform(3.5, 4.5, 1))         # Lower_Gear_Diameter
-        changed_parameter['changed_LGP'] = float(np.random.uniform(3.6, 4.2, 1))         # Lower_Gear_Position
-        changed_parameter['changed_GBR'] = float(np.random.uniform(1.7, 4.0, 1))         # Gear_Bolt_Right_B
-        changed_parameter['changed_HEL'] = float(np.random.uniform(6.3, 7.5, 1))         # Height of Extension left
-        changed_parameter['changed_HER'] = float(np.random.uniform(3.0, 6.0, 1))         # Height of Extension right
-        changed_parameter['bolt_corrosion_percent'] = int(np.random.uniform(20, 40))
-        changed_parameter['bottom_corrosion_percent'] = int(np.random.uniform(20, 40))
-        num_bolts_B=random.choice(Upper_Bolt_Nummber_B)
         ###########################################  
         #   Create Type B Extension 1 Motor       #
         ###########################################
-        create_Motor_Obj_B(Extension_Type_B = 'Extension_Type_1', Bolt_type_mode = 'Torx', changed_parameter = changed_parameter, 
-            Gear_Bolt_Nummber_B= Upper_Bolt_Nummber_B[0] , Bottom_Corrosion_Type=Bottom_Corrosion, Bolt_Corrosion_Type=Bolt_Corrosion, save_dir = save_dir_TypeB1_origial)      # Bolt_type_mode = ['Random', 'Torx']
+
+        changed_parameter = {}
+        # changed_parameter['changed_BL'] = float(np.random.uniform(6.2, 8.0, 1))          # Bottom_Length
+        # changed_parameter['changed_SBL'] = float(np.random.uniform(0.6, 2.0, 1))         # Sub_Bottom_Length
+        # changed_parameter['changed_LGD'] = float(np.random.uniform(3.5, 4.5, 1))         # Lower_Gear_Diameter
+        # changed_parameter['changed_LGP'] = float(np.random.uniform(3.6, 4.2, 1))         # Lower_Gear_Position
+        # changed_parameter['changed_GBR'] = float(np.random.uniform(1.7, 4.0, 1))         # Gear_Bolt_Right_B
+        # changed_parameter['changed_HEL'] = float(np.random.uniform(6.3, 7.5, 1))         # Height of Extension left
+        # changed_parameter['changed_HER'] = float(np.random.uniform(3.0, 6.0, 1))         # Height of Extension right
+        # changed_parameter['bolt_corrosion_percent'] = int(np.random.uniform(20, 40))
+        # changed_parameter['bottom_corrosion_percent'] = int(np.random.uniform(20, 40))
+        num_bolts_B=random.choice(Upper_Bolt_Nummber_B)
+        
+        # create_Motor_Obj_B(Extension_Type_B = 'Extension_Type_1', Bolt_type_mode = 'Torx', changed_parameter = changed_parameter, 
+        #     Gear_Bolt_Nummber_B= Upper_Bolt_Nummber_B[0] , Bottom_Corrosion_Type=Bottom_Corrosion, Bolt_Corrosion_Type=Bolt_Corrosion, save_dir = save_dir_TypeB1_origial)      # Bolt_type_mode = ['Random', 'Torx']
 
         ###########################################  
         #   Create Type B Extension None Motor    #
         ###########################################
+        
         changed_parameter['changed_BL'] = float(np.random.uniform(6.2, 8.0, 1))          # Bottom_Length
         changed_parameter['changed_SBL'] = float(np.random.uniform(0.6, 2.0, 1))         # Sub_Bottom_Length
         changed_parameter['changed_LGD'] = float(np.random.uniform(3.5, 4.5, 1))         # Lower_Gear_Diameter
@@ -274,5 +281,5 @@ def main(num_motor):
 
 
 if __name__ == '__main__':
-    num_motor_for_dataset=1000      #   paramater to set dataset size
+    num_motor_for_dataset=200      #   paramater to set dataset size
     main(num_motor=num_motor_for_dataset)
