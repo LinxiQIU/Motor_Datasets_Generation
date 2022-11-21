@@ -60,7 +60,7 @@ blender -b -P C:\Users\linux\PycharmProjects\Master\point_cloud_generation.py --
 ### 4. Point Cloud Dataset augmentation
 On the basis of the point cloud dataset in the previous step, we add more random noises to augment data. For example, we add a cover randomly above the motor, randomly move the clamping parts. Here is a sample image for augmented point cloud of cuboid.  
 
-![](https://github.com/LinxiQIU/Motor_Datasets_Generation/blob/master/images/cuboid_augment_img.jpg)
+<img src="https://github.com/LinxiQIU/Motor_Datasets_Generation/blob/master/images/cuboid_augment_img.jpg" width="960" height="540">
 
 You can get the whole augmented cuboid point cloud dataset by running `augmented_pc_generation.py` with Blensor. 
 > Copy the `get_3d_bbox.py` and `points2pcd.py` into the `Blensor/2.79/scripts/modules/`
